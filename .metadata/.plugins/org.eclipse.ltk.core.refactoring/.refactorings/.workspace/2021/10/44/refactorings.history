@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;Day09_jiin/src/Phone2.java&apos;" deleteContents="false" description="Delete resource &apos;Day09_jiin/src/Phone2.java&apos;" element1="/Day09_jiin/src/Phone2.java" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1635516258351"/>&#x0A;<refactoring comment="Delete resource &apos;Day09_jiin/src/PhoneMain2.java&apos;" deleteContents="false" description="Delete resource &apos;Day09_jiin/src/PhoneMain2.java&apos;" element1="/Day09_jiin/src/PhoneMain2.java" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1635516262009"/>
+</session>

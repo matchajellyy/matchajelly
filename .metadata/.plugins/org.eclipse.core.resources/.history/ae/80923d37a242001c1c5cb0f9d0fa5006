@@ -1,0 +1,25 @@
+package api.io.stream;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+public class StreamCopy {
+
+	public static void main(String[] args) {
+		
+		FileInputStream oldFile = null;
+		FileOutputStream newFile = null;
+
+		try {
+			
+			oldFile = new FileInputStream("C:\\Users\\WiTHUS\\Desktop\\java_web_jiin\\eclipse-jee-2021-09-R-win32-x86_64\\java_workspace\\Day18_jiin\\src\\api\\io\\stream\\1.jpg");
+			newFile = new FileOutputStream("C:\\Users\\WiTHUS\\Desktop\\java_web_jiin\\file");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+				
+		
+	}
+
+}

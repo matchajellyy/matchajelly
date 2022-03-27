@@ -1,0 +1,23 @@
+
+public class LoopNestingQuiz {
+
+	public static void main(String[] args) {
+		
+		for(int dan = 2; dan <= 9; dan++) {
+			System.out.print(dan + "단: ");
+			for(int hang = 1; hang <= 9; hang++) {
+				System.out.printf("%dx%d=%d ", dan, hang, dan * hang);
+				System.out.println("------------------");
+			}
+			
+		}
+		for(int dan = 2; dan <= 9; dan++) {
+			System.out.print(dan + "단: ");
+			for(int hang = 1; hang <= 9; hang++) {
+				System.out.printf("%dx%d=%d ", dan, hang, dan * hang);
+			}
+			
+		}
+	}
+
+}

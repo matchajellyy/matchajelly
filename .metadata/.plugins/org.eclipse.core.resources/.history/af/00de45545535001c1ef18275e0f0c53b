@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class BreakQuiz {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("정수1: ");
+		int a = sc.nextInt();
+		System.out.println("더할 수를 입력하세요: ");
+		int b = sc.nextInt();
+		
+		
+	}
+
+}

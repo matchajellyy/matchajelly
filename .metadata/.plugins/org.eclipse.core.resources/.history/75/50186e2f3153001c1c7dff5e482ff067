@@ -1,0 +1,44 @@
+package jdbc;
+
+import java.util.Scanner;
+
+public class JDBCInsert {
+	
+	public static void main(String[] args) {
+			
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("아이디: ");
+		String id = sc.next();
+		
+		System.out.println("비밀번호: ");
+		String pw = sc.next();
+		
+		System.out.println("이름: ");
+		String name = sc.next();
+		
+		System.out.println("이메일: ");
+		String email = sc.next();
+		
+		//////////////
+		//SQL문 작성
+		//SQL문은 String 형태로 작성합니다.
+		//변수가 들어갈 자리에 ?를 채웁니다.
+		String sql = "INSERT INTO members VALUES (?,?,?,?)";
+		
+		//DB 연동 순서
+		//1.DB 사용자 계정명, 암호, DB url 등 초기 데이터 변수를 설정합니다.
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String uid = "hr";
+		String upw = "hr";
+		
+		//2. JDBC 커넥터 드라이버를 호출합니다.
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
+		
+		
+		
+		
+		
+	}
+}

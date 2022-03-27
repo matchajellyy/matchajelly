@@ -1,0 +1,50 @@
+
+public class WhileExample2 {
+
+	public static void main(String[] args) {
+	
+		// 48 ~ 150 사이의 정수 중 8의 배수만 가로로 출력
+		
+		int n = 48;
+		while (n <= 150) {
+		if (n % 8 ==0) {
+		System.out.print(n + " ");
+		
+	}
+		n++;
+	}
+		
+		
+		int i = 1;
+		while (i <= 100) {
+			if (i % 4 ==0 && i % 8 !=0) {
+				System.out.print(i + " ");
+			}
+			i++;
+	}
+		
+		System.out.println();
+		
+		int x = 1;
+		int count = 0;
+		while (x <= 30000) {
+		if(x % 258 == 0)
+		count++;
+		}
+		x++;
+		System.out.print(x + "1~30000 중 258의 배수의 개수: " + count );
+		
+			}
+		
+	}
+		
+		
+		
+		
+		
+		
+		
+
+
+
+

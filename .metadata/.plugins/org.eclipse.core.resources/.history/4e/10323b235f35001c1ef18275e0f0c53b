@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class BreakQuiz023 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int num1 = (int) (Math.random() * 100 + 1);
+		
+		System.out.println("정답을 입력해 주세요.: ");
+		int i = sc.nextInt();
+		
+
+	}
+
+}

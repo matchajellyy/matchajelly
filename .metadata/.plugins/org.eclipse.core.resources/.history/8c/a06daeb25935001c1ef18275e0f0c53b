@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class BreakQuiz {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int correctCount = 0;
+		int incorrectCount =0;
+		
+		int num1 = (int) (Math.random() * 100 + 1);
+		int num2 = (int) (Math.random() * 100 + 1);
+		
+		while(true) {
+			System.out.printf("%d x %d = ??", num1, num2);
+			System.out.println("");
+			System.out.println("정답을 모르시면 0을 입력하면 종료됩니다.");
+			System.out.println("> ");
+
+		
+		int answer = sc.nextInt();
+	
+		
+		if(answer == num1 + num2) {
+			System.out.println("정답입니다.");
+			correctcount++;
+			break;
+		}else if (answer == 0) {
+			System.out.printf("정답은 %d 였습니다.", num1 * num2);
+			break;
+			
+		}else {
+			System.out.println("틀렸습니다.");
+			incorrectcount++;
+		}
+		System.out.println("정답 횟수: " + correctcount + "회");
+		System.out.println("틀린 횟수: " + incorrectcount + "회");
+		
+		}
+		
+	}
+
+}

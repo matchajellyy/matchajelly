@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class BreakQuiz023 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("정답을 입력해 주세요: ");
+		int i = sc.nextInt();
+		
+		while(true) {
+			int num1 = (int) (Math.random() * 100 + 1);
+		
+		if(i > num1) {
+			System.out.println("DOWN");
+		}else {
+			System.out.println("UP");
+		}
+		
+		
+			
+		}
+		
+		sc.close();
+	}
+
+}
