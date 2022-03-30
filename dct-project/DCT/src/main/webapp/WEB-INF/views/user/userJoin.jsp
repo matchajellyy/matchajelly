@@ -5,90 +5,128 @@
     <style>
     
         
-    #main {
-        min-height: 800px;
-        display: block;
-    }
-    :after, :before {
-        box-sizing: inherit;
-    }
+#main {
+    min-height: 800px;
+    display: block;
+}
+:after, :before {
+    box-sizing: inherit;
+}
 
-    .join-form .titlebox h4 {
-        text-align: center;
-    }
+.join-form .titlebox h2 {
+    text-align: center;
+}
 
-    .join-group {
-        border-radius: 8px;
-        width: 600px;
-        margin: 0 auto;
-        padding: 15px; 
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15)
-    }
+.join-group {
+    border-radius: 8px;
+    width: 600px;
+    margin: 0 auto;
+    padding: 15px; 
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15)
+}
 
-    .form-join {
-        display: flex;
-        flex-direction: column;
-    }
+.form-join {
+    display: flex;
+    flex-direction: column;
+}
 
-    :after, :before {
-        box-sizing: inherit;
-    }
+.in-line{
+  width:350px;
+  height:40px;
+}
 
-    .userJoinForm {
-        display: block;
-        margin-top: 0em;
-    }
+.form-group #userId {
+	  width:70%;
+      height:100%;
+      border:none;
+      font-size:14px;
+      padding-left: 5px;
+      font-style: oblique;
+      display:inline;
+      outline:none;
+      box-sizing: border-box;
+      color:#555;
+      line-height:1.42857143;
+      border: 1px solid #ccc;
+      
+}
+.form-group #idCheckBtn {
+      width: 30%;
+      height:100%;
+      background-color: lightgray;
+      border: none;
+      font-size:11px;
+      color:#042AaC;
+      display:inline-block;
+      margin-left: -10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      text-align:center;
+      white-space: nowrap;
+      border-radius: 2%;
+}
 
 
-    .ac-button.is-solid.is-primary {
-        border-color: rgba(233, 161, 233, 0.651);
-        font-weight: 700;
-        background-color: rgba(233, 161, 233, 0.651);
-    }
 
-    .pg_signup .form__button {
-        margin-top: 16px;
-        margin-bottom: 12px;
-    }
+:after, :before {
+    box-sizing: inherit;
+}
 
-    .ac-button.is-solid {
-        border: 1px solid;
-        color: #fff;
-    }
+.userJoinForm {
+    display: block;
+    margin-top: 0em;
+}
 
-    .ac-button.is-lg {
-        padding: 0 16px;
-        height: 48px;
-        line-height: 1.47;
-        font-size: 15px;
-        letter-spacing: -.3px;
-    }
 
-    .ac-button.is-primary {
-        border-color: rgba(233, 161, 233, 0.651);
-        font-weight: 700;
-        background-color: rgba(233, 161, 233, 0.651);
-    }
+.ac-button.is-solid.is-primary {
+    border-color: rgba(233, 161, 233, 0.651);
+    font-weight: 700;
+    background-color: rgba(233, 161, 233, 0.651);
+}
 
-    .ac-button {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        line-height: 1.47;
-        font-weight: 500;
-        cursor: pointer;
-        -webkit-appearance: none;
-        padding: 0 12px;
-       	width: 100%;
-        line-height: 1.43;
-        font-size: 14px;
-        letter-spacing: -.3px;
-        border: 1px solid;
-        color: #fff;
-    }
-    
+.pg_signup .form__button {
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+.ac-button.is-solid {
+    border: 1px solid;
+    color: #fff;
+}
+
+.ac-button.is-lg {
+    padding: 0 16px;
+    height: 48px;
+    line-height: 1.47;
+    font-size: 15px;
+    letter-spacing: -.3px;
+}
+
+.ac-button.is-primary {
+    border-color: rgba(233, 161, 233, 0.651);
+    font-weight: 700;
+    background-color: rgba(233, 161, 233, 0.651);
+}
+
+.ac-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    line-height: 1.47;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-appearance: none;
+    padding: 0 12px;
+   	width: 100%;
+    line-height: 1.43;
+    font-size: 14px;
+    letter-spacing: -.3px;
+    border: 1px solid;
+    color: #fff;
+}
+
 
 /* 회원가입 종료 */
     </style>
@@ -104,47 +142,52 @@
 				<div class="row">
 					<div class="join-form">
 						<div class="titlebox">
-							<h4>회원가입</h4>
+							<h2 style="margin-top: 40px;">회원가입</h2>
 						</div>
 						<div class="join-group">
 							<form action="<c:url value='/user/join' />" method="post" id="joinForm">
 								<div class="form-group">
 									<label for="id">ID</label>
+									<span id="msgId" style="font-size: 14px;">*필수 사항입니다.</span>
+									<div class="in-line">
 										<input type="text" name="userId" id="userId" class="form-control" placeholder="아이디(영문 포함 4~12자 이상)">
-										<button type="button" class="btn btn-primary" id="idCheckBtn">아이디 중복체크</button>
-									<span id="msgId">*필수 사항입니다.</span>
+										<input type="button" class="btn btn-primary" id="idCheckBtn" value="아이디 중복체크" style="text-align: center; margin-bottom: 2px;">
+									</div>
 									<!--아이디 중복 여부 메시지 공간-->
 								</div>
-								 <div class="form-group">
-                                <label for="email">이메일</label>
+								<div class="form-group">
+	                                <label for="email">이메일</label>
+	                                <span id="join-essential" style="font-size: 14px;">*필수 사항입니다.</span>
                                     <input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="유효한 이메일을 입력해 주세요.">
-                           		 </div>
+                           		</div>
 								<div class="form-group">
-									<label for="password">Password</label> <input type="password"
-										id="userPw" class="form-control" name="userPw"
-										placeholder="비밀번호 (영 대/소문자, 숫자 조합 8~16자)"> <span
-										id="msgPw"></span>
+									<label for="password">Password</label>
+									<span id="join-essential" style="font-size: 14px;">*필수 사항입니다.</span>
+									<input type="password" id="userPw" class="form-control" name="userPw" placeholder="비밀번호 (영 대/소문자, 숫자 조합 8~16자)">
+									<span id="msgPw"></span>
 									<!--비밀번호 유효성 메세지 공간-->
 								</div>
 								<div class="form-group">
-									<label for="pw-confirm">Password</label> <input type="password"
-										id="pwConfirm" class="form-control"
-										placeholder="비밀번호를 확인해 주세요."> <span id="msgPw-c"></span>
+									<label for="pw-confirm">Password</label>
+									<span id="join-essential" style="font-size: 14px;">*필수 사항입니다.</span>
+									<input type="password" id="pwConfirm" class="form-control" placeholder="비밀번호를 확인해 주세요."> <span id="msgPw-c"></span>
 									<!--비밀번호 유효성 메세지 공간-->
 								</div>
 								<div class="form-group">
-									<label for="name">Name</label> <input type="text" id="name" name="userName"
-										class="form-control" placeholder="이름을 입력해 주세요."> <span
-										id="msgPw-c"></span>
+									<label for="name">Name</label>
+									<span id="join-essential" style="font-size: 14px;">*필수 사항입니다.</span>
+									<input type="text" id="name" name="userName" class="form-control" placeholder="이름을 입력해 주세요.">
+									<span id="msgPw-c"></span>
 									<!--비밀번호 유효성 메세지 공간-->
 								</div>
 								<div class="form-group">
 									<label for="hp">Phone</label>
-										<input type="tel" id="hp" class="form-control" id="userPhone" name="userPhone"
-											placeholder="전화번호를 입력해 주세요.">
+									<span id="join-essential" style="font-size: 14px;">*필수 사항입니다.</span>
+										<input type="tel" id="hp" class="form-control" id="userPhone" name="userPhone" placeholder="전화번호를 입력해 주세요.">
 								</div>
 								<div class="form-group">
 									<label for="addr-num">Address</label>
+									<span id="join-essential" style="font-size: 14px;">*필수 사항입니다.</span>
 									<div class="input-group">
 										<input type="text" id="userZipcode" class="form-control" name="userZipcode"
 											placeholder="우편번호" onclick="searchAddress()">
@@ -196,8 +239,10 @@ $('#idCheckBtn').click(function() {
 			if(data === 'ok') {
 				$('#userId').attr('readonly', true);
 				$('#msgId').html('사용 가능한 아이디 입니다.');
+				$("#msgId").css("color","blue");
 			} else {
 				$('#msgId').html('중복된 아이디 입니다.');
+				$("#msgId").css("color","red");
 				$('#userId').focus();
 			}
 			

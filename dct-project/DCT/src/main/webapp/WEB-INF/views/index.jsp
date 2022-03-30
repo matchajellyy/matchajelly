@@ -32,16 +32,6 @@
 							</div>
 						</div>
 						
-						<!-- Controls -->
-						<!-- 좌, 우 화살표 -->
-						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
 					</div>
 				</div>
 			</div>
@@ -54,47 +44,48 @@
 		<div class="container">
 			<div class="row">
 				<div class="recommended-lecture">
-					<h2>추천강의</h2>
+					<h2>나를 성장 시킬 강의</h2>
 				</div>
 			</div>
 
 			<div class="row">
 				<ul class="recommended-lecture-list">
-					<c:forEach var="vo" begin="1" items="${lectureList}" end="8">
+					<c:forEach var="vo" begin="0" items="${lectureList}" end="4">
 						<li>
 							<a href="<c:url value='/lecture/lectureDetail?lectureNo=${vo.lectureNo}&pageNum=1&keyword=${pc.paging.keyword }&condition=${pc.paging.condition }' />">
-								<img src="<c:url value='/lecture/lectureDisplay?thumbnailFileLoca=${vo.thumbnailFileLoca}&thumbnailFilename=${vo.thumbnailFilename}' />">
+								<img src="<c:url value='/lecture/lectureDisplay?thumbnailFileLoca=${vo.thumbnailFileLoca}&thumbnailFilename=${vo.thumbnailFilename}' />" style="max-width: 180px; max-height: 140px; min-width: 180px; min-height: 140px;">
 								<span>강의 제목: ${vo.lectureTitle}</span>
 								<span>강사(닉네임): ${vo.userNo}</span>
-								<span>가격: ￦<fmt:formatNumber value="${vo.lecturePrice}" pattern="#,###" /></span>
+								<span>가격: ￦<fmt:formatNumber value="${vo.lecturePrice}" pattern="#,###" />원</span>
 							</a>
-						</li>
+						</li> 
 					</c:forEach>
 				</ul>
 			</div>
 
 			<div class="row">
-				<div class="notice">
-					<h2>공지사항</h2>
-				</div>
-				<div class="notice-info">
-					<div class="notice-title">
-						<h2>공지 제목: 공지사항 제목1</h2>
+				<div class="notice-div">
+					<div class="notice">
+						<h3 style="font-weight: bold">공지사항</h3>
 					</div>
-					<div class="notice-content">
-						<h3>공지 내용:</h3>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac tincidunt justo. Aenean aliquet metus sed sem
-							bibendum, quis ornare mi feugiat. Nulla lobortis metus sit amet arcu dapibus, a condimentum velit ullamcorper.
-							Mauris et commodo dui. Aenean sodales elementum erat quis egestas. Duis sed lorem lacus. Duis varius consequat
-							rutrum. Nulla facilisi.
-							Donec finibus eu lectus ut ornare. Aenean vel ullamcorper lectus, et faucibus libero. Nullam mollis eros in magna
-							sodales vulputate. Duis in tincidunt magna, sit amet cursus sem. Fusce condimentum aliquam ipsum non bibendum.
-							Nullam eu ante turpis. Nam tincidunt volutpat dictum. Sed sed felis id nisl semper ultrices ut et sapien. Nunc
-							egestas, leo quis fermentum blandit, elit nisi fringilla arcu, in tincidunt turpis justo sed velit. Praesent
-							tempus risus quis gravida venenatis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						</p>
-					</div>
+					<ul class="notice-list">
+						<li class="notice-item">
+							<a href="#" class="notice-link">
+								<div class="notice-info">
+									<div class="notice-name">[업데이트 소식] 다양한 업데이트가 진행 되었습니다. </div>
+									<div class="notice-date">2022.03.31</div>
+								</div>
+							</a>
+						</li>
+						<li class="notice-item">
+							<a href="#" class="notice-link">
+								<div class="notice-info">
+									<div class="notice-name">[공지] 코로나 상황에 대하여 공지드립니다. </div>
+									<div class="notice-date">2022.03.26</div>
+								</div>
+							</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>

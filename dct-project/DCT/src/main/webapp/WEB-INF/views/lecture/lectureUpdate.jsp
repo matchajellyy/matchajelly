@@ -95,6 +95,7 @@
                                     <tr>
                                         <td class="w-title" >TITLE</td>
                                         <td><input type="text" class="form-control" name="lectureTitle" value="${lectureArticle.lectureTitle }"></td>
+                                        <td><input type="hidden" class="form-control" name="lectureNo" value="${lectureArticle.lectureNo }"></td>
                                     </tr>
                                     <tr>
                                         <td class="w-title">price</td>

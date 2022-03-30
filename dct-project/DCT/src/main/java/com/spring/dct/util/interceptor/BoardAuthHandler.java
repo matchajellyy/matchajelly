@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.spring.dct.vo.CommunitiesVO;
 import com.spring.dct.vo.UsersVO;
 
 public class BoardAuthHandler implements HandlerInterceptor {
@@ -25,7 +26,8 @@ public class BoardAuthHandler implements HandlerInterceptor {
 		
 		System.out.println("게시판 권한 인터셉터 발동!");
 		
-		String writer = request.getParameter("writer");
+		String writer = request.getParameter("userName");
+		
 		HttpSession session = request.getSession();
 		UsersVO vo = (UsersVO) session.getAttribute("login");
 		

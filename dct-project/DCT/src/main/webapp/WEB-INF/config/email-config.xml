@@ -13,7 +13,7 @@
 	 -->
 	
 	<!-- 2. namespace 등록 후 context 태그를 통해 등록하는 방법 -->
-	<context:property-placeholder location="classpath:/db-config/email.properties"/>
+	<context:property-placeholder location="classpath:/properties/email.properties"/>
 
 	<!-- 이메일 인증 관련 빈 등록 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

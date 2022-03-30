@@ -6,19 +6,40 @@
         /* 회원 정보 수정 */
         
     .modify_header .line{
-        margin-bottom: 2rem;
-        padding-bottom: 2rem;
-        border-bottom: 0.2rem solid #424242;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #424242;
     }
 
     .modify_header .big_class .user_info p {
-        font-size: 1.5rem;
+        font-size: 16px;
         color: black;
     }
 
     .modify_header .big_class .user_info .user_selection input  {
-        border: 1px solid #000000;
-        width: 200px;
+        width: 250px;
+        background: #f5f5f5;
+	    box-shadow: none;
+	    border: 0;
+	    border-radius: 0;
+    }
+
+    .modify_header .big_class .user_info .user_selection2 input  {
+        background: #f5f5f5;
+	    box-shadow: none;
+	    border: 0;
+	    border-radius: 0;
+        width: 400px;
+        margin: 3px;
+    }
+    
+    .big_class .user_info li  {
+    	padding: 1px;
+    }
+    
+    .big_class .user_info .user_info_p  {
+    	padding: 1px;
+    	margin: 3px;
     }
 
     .modify_header .big_class .hi #email-agree {
@@ -30,14 +51,42 @@
     .big_class input {
         width: 150px;
     }
-
-    .big_class #address, #address_extra {
-        width: 300px;
+    
+    .big_class h3 {
+        width: 150px;
+        font-size: 1em;
+        margin-bottom: -5px;
     }
     
     .user_selection #userAddress, #userAddressDetails {
-    	width: 300px;
+    	width: 400px;
     }
+
+	/*aside*/
+	
+	.mypage_header .container h2{
+		font-size: 21px;
+		margin-left: 5px;
+	}
+	
+	.aside_menu p{
+	    font-size: 18px;
+	}
+	
+	.aside_menu .menu-list .btn_wrap {
+		font-size: 15px;
+		color: #757575;
+	}
+	
+	.aside_menu .menu-list a:hover, .aside_menu .menu-list a:focus {
+	 color: #000;
+	 background: #f2f2f2;
+	 text-decoration: none;
+	}
+	
+	.menu-label {
+		margin: 1px;
+	}
     </style>
 
 <%@ include file="../include/header.jsp"%>
@@ -50,13 +99,13 @@
         <section>
             <div class="mypage_header">
                 <div class="container">
-                    <h2>마이페이지</h2>
+                    <h2>MY PAGE</h2>
                 </div>
             </div>
 
             <div class="container">
                 <div class="columns">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="aside_menu">
                             <aside class="sidebar_left">
                                 <div class="menu_container">
@@ -68,7 +117,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="btn_wrap " href="#">
+                                            <a class="btn_wrap " href="<c:url value='/user/userMypageRecentLecture' />">
                                                 <span>내가 올린 강의</span>
                                             </a>
                                         </li>
@@ -92,16 +141,6 @@
                                         </li>
                                         <li>
                                             <a class="btn_wrap " href="#">
-                                                <span>위시리스트</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="btn_wrap " href="#">
-                                                <span>쿠폰함</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="btn_wrap " href="#">
                                                 <span>구매내역</span>
                                             </a>
                                         </li>
@@ -118,58 +157,58 @@
                             </aside>
                         </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-10">
                         <section class="modify_header">
                             <div class="big_class">
                                 <h3>기본 정보 수정</h3>
                                 <div class="line"></div>
                        		  		<form action="<c:url value='/user/userUpdate' />" method="post" id="updateForm">
-                                    <ul class="user_info">
+                                    <ul class="user_info" >
                                         <li>
-                                            <p>이름</p>
+                                            <p class="user_info_p">이름</p>
                                         </li>
-                                        <ul class="user_selection">
-                                            <input id="user-name" type="text" name="name" value="${userInfo.userName}" minlength="2" readonly>
+                                        <ul class="user_selection" >
+                                            <input id="user-name" type="text" name="name" value="${userInfo.userName}" minlength="2" readonly style="font-weight:bold;  border-style:solid  border-width 5px">
                                         </ul>
                                         <li>
-                                            <p>아이디</p>
+                                            <p class="user_info_p">아이디</p>
                                         </li>
                                         <ul class="user_selection">
-                                            <input id="user-id" type="text" name="userId" value="${userInfo.userId}" minlength="2" readonly>
+                                            <input id="user-id" type="text" name="userId" value="${userInfo.userId}" minlength="2" readonly style="font-weight:bold;  border-style:solid  border-width 5px" >
                                         </ul>
                                         <li>
-                                            <p>이메일</p>
+                                            <p class="user_info_p">이메일</p>
                                         </li>
                                         <ul class="user_selection">
-                                            <input id="user-email" type="text" name="userEmail" minlength="2" value="${userInfo.userEmail}">
+                                            <input id="user-email" type="text" name="userEmail" minlength="2" value="${userInfo.userEmail}" style="font-weight:bold;  border-style:solid  border-width 5px">
                                         </ul>
                                         <li>
-                                            <p>휴대전화</p>
+                                            <p class="user_info_p">휴대전화</p>
                                         </li>
                                         <ul class="user_selection">
-                                            <input id="user-phone" type="text" name="userPhone" minlength="2" value="${userInfo.userPhone}">
+                                            <input id="user-phone" type="text" name="userPhone" minlength="2" value="${userInfo.userPhone}" style="font-weight:bold;  border-style:solid  border-width 5px">
                                         </ul>
                                         <li>
-                                            <p>변경할 비밀번호</p>
+                                            <p class="user_info_p">변경할 비밀번호</p>
                                         </li>
                                         <ul class="user_selection">
-                                            <input type="password" id="userPw" type="text" name="userPw" minlength="2">
+                                            <input type="password" id="userPw" type="text" name="userPw" minlength="2" style="font-weight:bold;  border-style:solid  border-width 5px">
                                         </ul>
                                         <li>
-                                            <p>변경할 비밀번호 확인</p>
+                                            <p class="user_info_p">변경할 비밀번호 확인</p>
                                         </li>
                                         <ul class="user_selection">
-                                            <input type="password" id="userPwChk" type="text" name="userPwChk" minlength="2">
+                                            <input type="password" id="userPwChk" type="text" name="userPwChk" minlength="2" style="font-weight:bold;  border-style:solid  border-width 5px">
                                         </ul>
                                     </ul>
                                 <h3>기본 배송 정보</h3>
                                 <div class="line"></div>
                                     <ul class="user_info">
-                                        <ul class="user_selection">
-                                            <input type="text" id="userZipcode" name="userZipcode" value="${userInfo.userZipcode}" readonly>
-                                            <button type="button" id="addrBtn"><span>검색</span></button><br><br>
-                                            <input type="text" id="userAddress" name="userAddress" value="${userInfo.userAddress}" placeholder="검색 버튼으로 주소를 검색해 주세요" readonly><br><br>
-                                            <input type="text" id="userAddressDetails" name="userAddressDetails" value="${userInfo.userAddressDetails}" placeholder="상세 주소를 입력해 주세요.">
+                                        <ul class="user_selection2">
+                                            <input type="text" id="userZipcode" name="userZipcode" value="${userInfo.userZipcode}" readonly style="width:100px;" style="font-weight:bold;  border-style:solid  border-width 5px">
+                                            <button type="button" id="addrBtn"><span>검색</span></button><br>
+                                            <input type="text" id="userAddress" name="userAddress" value="${userInfo.userAddress}" placeholder="검색 버튼으로 주소를 검색해 주세요" readonly style="font-weight:bold;  border-style:solid  border-width 5px"><br>
+                                            <input type="text" id="userAddressDetails" name="userAddressDetails" value="${userInfo.userAddressDetails}" placeholder="상세 주소를 입력해 주세요." style="font-weight:bold;  border-style:solid  border-width 5px">
                                     	</ul>
                                     </ul>
                                 </form>
@@ -178,7 +217,7 @@
                                 <div class="line"></div>
                                 <ul class="hi">
                                     <p>
-                                        <span><input type="checkbox" id="email-agree"> 마케팅 수신 동의에 동의합니다.</span>
+                                        <span><input type="checkbox" id="email-agree" style="font-weight:bold;  border-style:solid  border-width 5px"> 마케팅 수신 동의에 동의합니다.</span>
                                     </p>
                                 </ul>
                                 <button type="button" id="updateBtn" class="ac-button is-lg is-solid is-primary e-sign-up-button form__button ">수정하기</button>

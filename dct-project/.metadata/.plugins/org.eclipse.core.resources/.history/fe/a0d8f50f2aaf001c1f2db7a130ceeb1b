@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<style>
+	
+	/* ---------------------------- 비밀번호 찾기 ---------------------------- */
+	#pw-search {
+		display: grid;
+		place-items: center;
+		min-height: 60vh;
+		text-align: center;
+	}
+	.pw-search-header {
+		margin-bottom: 30px;
+	}
+	.pw-search-footer input {
+		width: 30%;
+		height: 40px;
+		border: 1px solid;
+		margin-top: 20px;
+		position: relative;
+		outline: none;
+	}
+	.pw-search-footer button {
+		height: 40px;
+		position: absolute;
+		margin-left: -50px;
+		margin-top: 20px;
+	}
+	
+	/* 비밀번호 찾기 모달 */
+	#searchPwModal .search-pw-modal {
+		padding-top: 25px;
+	}
+	#searchPwModal .description p {
+		font-size: 16px;
+		line-height: 30px;
+	}
+	#searchPwModal .search-pw-modal-footer {
+		text-align: center;
+		margin-top: 20px;
+	}
+	
+</style>
+
+	<div class="wrapper">
+		<%@ include file="../include/header.jsp"%>
+
+		<section id="pw-search">
+			<div class="container">
+				<div class="row">
+					<div class="pw-search-header">
+						<h4>비밀번호 찾기</h4>
+                    </div>
+				</div>
+				<div class="row">
+                    <div class="pw-search-body">
+                        	<div class="form-group">
+                            	<input type="email" class="form-control form-control-user" id="userEmail" name="userEmail" placeholder="가입하신 이메일을 입력해 주세요.">
+                            	<input type="text" class="form-control form-control-user" id="userId" name="userId" placeholder="가입하신 id를 입력해 주세요.">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="mail-check-btn">이메일인증</button>
+                        </form>
+                    </div>
+				</div>
+			</div>
+		</section>
+
+		<%@ include file="../include/footer.jsp"%>
+	</div>
+	
+<script>
+</script>

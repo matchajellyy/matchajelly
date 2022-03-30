@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ include file="../include/header.jsp" %>
 
@@ -187,15 +188,19 @@
 
 .user-star-check{
 	color: orange;
-	font-size: large;
-  
+	font-size: 1.5rem;
+	cursor: pointer;
 }
+
+.user-star-check:not(.on){
+	color: #ccc;
+}
+
+.user-star-check.on{
+	color: orange;
+}
+  
 </style>
-
-
-
-
-
 
 
 <div id="wrapper">
@@ -209,12 +214,12 @@
                     </div>
 					<form action="<c:url value='/order/addCart' />" method="post" id="addCartForm">
 	                    <div class="col-md-6 col-xs-12">
-	                        <img src="<c:url value='/lecture/lectureDisplay?thumbnailFileLoca=${lectureArticle.thumbnailFileLoca}&thumbnailFilename=${lectureArticle.thumbnailFilename}' />" alt="Detail">
+	                        <img src="<c:url value='/lecture/lectureDisplay?thumbnailFileLoca=${lectureArticle.thumbnailFileLoca}&thumbnailFilename=${lectureArticle.thumbnailFilename}' />" alt="Detail" style="max-width: 550px; max-height: 360px; min-width: 500px; min-height: 300px;">
 	                    </div>
 	                    <div class="col-md-6 col-xs-12">
 	                        <div class="detail-info">
 	                            <p class="detail-title">${lectureArticle.lectureTitle }</p>
-	                            <p class="detail-price"><strong>${lectureArticle.lecturePrice} </strong></p>
+	                            <p class="detail-price"><strong><fmt:formatNumber value="${lectureArticle.lecturePrice}" pattern="#,###" />원</strong></p>
 	                            <span class="glyphicon glyphicon-star detail-star"></span>
 	                            <span class="glyphicon glyphicon-star detail-star"></span>
 	                            <span class="glyphicon glyphicon-star detail-star"></span>
@@ -229,7 +234,7 @@
 	                        <div class="detail-control">
 	                            <div class="detail-total-price clearfix">
 	                                <p class="left total-left">총 상품금액</p>
-	                                <p class="right total-right"><strong>${lectureArticle.lecturePrice - lectureArticle.lectureDiscountPrice}원</strong></p>
+	                                <p class="right total-right"><strong><strong><fmt:formatNumber value="${lectureArticle.lecturePrice - lectureArticle.lectureDiscountPrice}" pattern="#,###" />원</strong></p>
 	                            </div>
 	                            <div class="detail-order clearfix">
 	                               	<input type="hidden" name="lectureNo" value="${lectureArticle.lectureNo}">
@@ -238,6 +243,8 @@
 	                               	<input type="hidden" name="lectureTitle" value="${lectureArticle.lectureTitle}">
 	                               	<input type="hidden" name="lecturePrice" value="${lectureArticle.lecturePrice}">
 	                               	<input type="hidden" name="lectureDiscountPrice" value="${lectureArticle.lectureDiscountPrice}">
+	                               	<input type="hidden" name="thumbnailFileLoca" value="${lectureArticle.thumbnailFileLoca}">
+	                               	<input type="hidden" name="thumbnailFilename" value="${lectureArticle.thumbnailFilename}">
 	                                <button type="button" id="btn-cart" class="left btn btn-default detail-btn">장바구니</button>
 	                                <button type="button" id="btn-purchase" class="right btn btn-primary detail-btn">구매하기</button>
 	                            </div>
@@ -246,8 +253,6 @@
 					</form>
                 </div>
             </div>
-            
-            
         </section>
 
         <hr>
@@ -255,25 +260,19 @@
             <div class="container">
                 <div class="row">
                     <!-- 16:9 aspect ratio -->
-                    <div class="embed-responsive embed-responsive-16by9 video">
+                    <div class="embed-responsive embed-responsive-16by9 video" style="width: 500px; padding-bottom: 0px; height: 500px; margin: 0 auto;">
                         <iframe class="embed-responsive-item" src="<c:url value='/lecture/videoDisplay?videoFileLoca=${lectureArticle.videoFileLoca}&videoFilename=${lectureArticle.videoFilename}' />"></iframe>
                     </div>
                     
-                    
-                    
-                <div class="row clearfix">
-                    <div class="container" id="detail-middle">
-                        
-                        
-                        <div class="col-md-12 detail-text"> 
-                        		 
-                            <p>${lectureArticle.lectureContent }    </p>
-                            
-                            
-                        </div>
-                    </div> 
-                </div>
-                    
+	                <div class="row clearfix">
+	                    <div class="container" id="detail-middle">
+	                        
+	                        <div class="col-md-12 detail-text"> 
+	                        	<div id="viewer"></div>
+                            	<input type="hidden" id="view" value="${lectureArticle.lectureContent }">
+	                        </div>
+	                    </div> 
+	                </div>
 
                 </div>
             </div>
@@ -352,12 +351,14 @@
                         <div class="detail-reply-wrap">
                             
                             <div class="detail-reply-content">
-                                <div class="user-star"> 
-                                    <span class="glyphicon glyphicon-star user-star-check"></span>
-                                    <span class="glyphicon glyphicon-star user-star-check"></span>
-                                    <span class="glyphicon glyphicon-star user-star-check"></span>
-                                    <span class="glyphicon glyphicon-star user-star-check"></span>
-                                    <span class="glyphicon glyphicon-star user-star-check"></span> &nbsp;
+                                <div class="user-star" id="star"> 
+                                    <span class="user-star-check" data-star="1">★</span>
+                                    <span class="user-star-check" data-star="2">★</span>
+                                    <span class="user-star-check" data-star="3">★</span>
+                                    <span class="user-star-check" data-star="4">★</span>
+                                    <span class="user-star-check" data-star="5">★</span>
+                                    <input type="hidden" name="startPoint" id="startPoint">
+									<br>
                                     <p> 체크해 주세요</p>
                                 </div>
                                        
@@ -397,6 +398,32 @@
 <script>
 	$(function() {
 		
+	 	var view = $('#view').val()
+	 	 
+	 	const viewer = toastui.Editor.factory({
+	 		  el: document.querySelector('#viewer'),
+	          viewer: true,
+	          height: '500px',
+	          initialValue: view
+	 	});
+	 	
+	 	
+	    function ToView() {
+	        viewer.getMarkdown(viewer.setHTML());
+	    };	
+	     
+
+			
+	    $('.user-star>span').click(function(){
+            $(this).parent().children('span.on').removeClass('on');
+            $(this).addClass('on').prevAll('span').addClass('on');
+            var point = $(this).attr('data-star');
+            
+		    $("#point").val(point); // 히든 인풋에 값 저장.
+		    return false;
+	    });
+		
+		// 장바구니 버튼 이벤트
 		$('#btn-cart').click(function() {
 			
 			const login = '${login}';
@@ -405,18 +432,23 @@
 				alert('로그인 후 이용하세요.');
 				location.assign('/');
 			} else {
-				const check = confirm('강의를 담았습니다. 장바구니 페이지로 이동할까요?');
+				const check = confirm('강의를 담겠습니까?');
 				if(check) {
-					location.assign('/order/carts');
+					alert('장바구니에 정상적으로 담았습니다.');
+					$('#addCartForm').submit();
 				}
 			}
 			
-			
 		}); // 장바구니 버튼 이벤트
 		
+		// 구매하기 버튼
 		$('#btn-purchase').click(function() {
 			
-			$('#addCartForm').submit();
+			const check = confirm('강의를 구매하시겠습니까?');
+			if(check) {
+				$('#addCartForm').attr('action', '<c:url value="/order/addPurchases" />')
+				$('#addCartForm').submit();
+			}
 		}); // 구매하기 버튼 이벤트
 		
 	}); // jQuery 끝

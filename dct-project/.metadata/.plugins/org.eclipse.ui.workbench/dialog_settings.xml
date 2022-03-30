@@ -10,6 +10,8 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\WiTHUS\Desktop\0329 최지인.zip"/>
+			<item value="C:\Users\WiTHUS\Desktop\0328 지인.zip"/>
 			<item value="C:\Users\WiTHUS\Desktop\0325 오전 cs.zip"/>
 			<item value="C:\Users\WiTHUS\Desktop\0323 마지막.zip"/>
 			<item value="C:\Users\WiTHUS\Desktop\0323 최지인.zip"/>

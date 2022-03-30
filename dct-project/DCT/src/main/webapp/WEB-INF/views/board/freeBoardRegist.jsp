@@ -56,7 +56,8 @@ section.community-header {
 								<tbody class="t-control">
 									<tr>
 										<td class="t-title">글쓴이</td>
-										<td><input type="text" class="form-control" name="userNo"></td>
+										<td><input type="text" class="form-control" readonly name="userName" value="${login.userName}"></td>
+										<td><input type="hidden" class="form-control" name="userNo" value="${login.userNo}" ></td>
 									</tr>
 									<tr>
 										<td class="t-title">제목</td>
@@ -69,7 +70,7 @@ section.community-header {
 									</tr>
 								</tbody>
 							</table>
-							<div class="write-button">
+							<div class="write-button" style="margin-right: 80px">
 								<button type="button" class="btn" onclick="location.href='<c:url value="/board/freeBoardList" />'">목록</button>
 								<button type="submit" class="btn btn-primary">등록</button>
 							</div>

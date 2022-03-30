@@ -2181,7 +2181,7 @@ social:
     - user-plus
     - users
     - video
-  label: Social
+  label: Referral
 spinners:
   icons:
     - asterisk

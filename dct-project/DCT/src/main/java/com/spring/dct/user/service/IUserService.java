@@ -1,6 +1,7 @@
 package com.spring.dct.user.service;
 
 import java.util.Date;
+
 import com.spring.dct.vo.UsersVO;
 
 public interface IUserService {
@@ -20,9 +21,25 @@ public interface IUserService {
 	// 회원 정보 얻어오기
 	UsersVO getInfo(String id);
 	
+	// 회원이 업로드한 강의 가져오기
+	UsersVO getUploadList(String id);
+	
 	// 회원 정보 수정
 	void updateUser(UsersVO vo);
 	
 	// 회원 정보 삭제
 	void deleteUser(UsersVO vo);
+	
+	//아이디 찾기
+	UsersVO searchId(String userEmail);
+    
+    int searchIdCheck(String userEmail);
+    
+    //비밀번호 찾기
+	UsersVO searchPw(String userEmail, String userId);
+    
+    int searchPwCheck(String userEmail, String userId);
+    
+    void updatePw(UsersVO vo);
+
 }

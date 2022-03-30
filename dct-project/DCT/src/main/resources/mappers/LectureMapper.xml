@@ -114,7 +114,7 @@
   	</select>
   		
   	
-  	<!-- 업로ㄱ드 강의 수정 -->
+  	<!-- 업로드 강의 수정 -->
   	<update id="update">
   		UPDATE onlinelecture_upload
   		SET lecture_writer= #{lectureWriter}, lecture_title= #{lectureTitle}, category_no = #{categoryNo},
@@ -125,8 +125,12 @@
   	</update>
 	
 
-
-
+	<!-- 업로드 강의 삭제 -->
+	<delete id="delete">
+  		DELETE FROM onlinelecture_upload
+  		WHERE lecture_No= #{lectureNo}
+  	
+  	</delete>
   
   
   

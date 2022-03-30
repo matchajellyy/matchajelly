@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
-import com.spring.dct.vo.UsersVO;
 import com.spring.dct.user.service.IUserService;
-import com.spring.dct.util.PageCreator;
-import com.spring.dct.util.PageVO;
+import com.spring.dct.util.MailSendService;
+import com.spring.dct.vo.UsersVO;
 
 @Controller
 @RequestMapping("/user")
@@ -31,6 +31,9 @@ public class UserController {
 
 	@Autowired
 	private IUserService service;
+	
+	@Autowired
+	private MailSendService mailService;
 
 	@GetMapping("/userJoin")
 	public void userJoin() {
@@ -287,9 +290,83 @@ public class UserController {
 		System.out.println("userIdSearch 페이지 진입");
 	}
 
-	@GetMapping("/userPwSearch")
-	public void userPwSearch() {
-		System.out.println("userPwSearch 페이지 진입");
+    @RequestMapping("/searchId")
+    public String searchId(String userEmail, Model model, RedirectAttributes ra, UsersVO vo) {
+      System.out.println("/user/searchId: POST");
+      System.out.println("받아 온 이메일: " + userEmail);
+      
+      if(service.searchIdCheck(vo.getUserEmail())==0) {
+    	  System.out.println("가입한 이메일이 없을 때");
+          model.addAttribute("msg", "이메일을 확인해주세요");
+          return "user/userIdSearch";
+       } else {
+    	  System.out.println("가입한 이메일이 있을 때");
+    	  UsersVO search = service.searchId(vo.getUserEmail());
+    	  
+          model.addAttribute("user", search);
+          System.out.println("service.searchId(vo.getUserEmail()) : " + service.searchId(vo.getUserEmail()));
+          
+          return "user/userIdFind";
+       }
+
+    }
+	
+    @GetMapping("/userIdFind")
+    public void userIdFind() {
+    	System.out.println("userIdFind 페이지 진입");
+    }
+    
+    @GetMapping("/userPwSearch")
+    public void userPwSearch() {
+    	System.out.println("userPwSearch 페이지 진입");
+    }
+    
+    
+    @RequestMapping("/searchPw")
+    public String searchPw(String userEmail, String userId, Model model, RedirectAttributes ra, UsersVO vo) {
+      System.out.println("/user/searchPw: POST");
+      
+      System.out.println("받아 온 이메일: " + userEmail);
+      System.out.println("받아 온 아이디: " + userId);
+
+      return "";
+    }
+    
+	// 이메일 인증
+	@GetMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(String email) {
+		return mailService.pwEmail(email);
+	}
+	
+    @GetMapping("/userPwNew/{userId}")
+    public String userPwNew(@PathVariable String userId, Model model, RedirectAttributes ra, UsersVO vo) {
+    	System.out.println("userPwNew 페이지 진입");
+    	
+    	System.out.println(userId);
+    	UsersVO userInfo = service.getInfo(userId);
+		model.addAttribute("userInfo", userInfo);
+		
+		return "user/userPwNew";
+    }
+    
+	@PostMapping("/pwNew")
+	public String pwNew(UsersVO vo, RedirectAttributes ra) {
+		System.out.println("내 정보 수정처리");
+		System.out.println("param: " + vo);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		System.out.println("암호화 하기 전 비밀번호: " + vo.getUserPw());
+		
+		String securePw = encoder.encode(vo.getUserPw());
+		System.out.println("암호화 후 비밀번호: " + securePw);
+		vo.setUserPw(securePw);
+		
+		service.updatePw(vo);
+		ra.addFlashAttribute("msg", "pwUpdateSuccess");
+		
+		return "redirect:/";
 	}
 
 }

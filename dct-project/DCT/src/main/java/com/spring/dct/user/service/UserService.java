@@ -47,6 +47,11 @@ public class UserService implements IUserService {
 	public UsersVO getInfo(String id) {
 		return mapper.getInfo(id);
 	}
+	
+	@Override
+	public UsersVO getUploadList(String id) {
+		return mapper.getUploadList(id);
+	}
 
 	@Override
 	public void updateUser(UsersVO vo) {
@@ -56,6 +61,31 @@ public class UserService implements IUserService {
 	@Override
 	public void deleteUser(UsersVO vo) {
 		mapper.deleteUser(vo);
+	}
+	
+	@Override
+    public UsersVO searchId(String userEmail) {
+        return mapper.searchId(userEmail);
+    }
+	
+	@Override
+	public int searchIdCheck(String userEmail) {
+		return mapper.searchIdCheck(userEmail);
+	}
+	
+	@Override
+    public UsersVO searchPw(String userEmail, String userId) {
+        return mapper.searchPw(userEmail, userId);
+    }
+	
+	@Override
+	public int searchPwCheck(String userEmail, String userId) {
+		return mapper.searchPwCheck(userEmail, userId);
+	}
+
+	@Override
+	public void updatePw(UsersVO vo) {
+		mapper.updatePw(vo);
 	}
 
 }

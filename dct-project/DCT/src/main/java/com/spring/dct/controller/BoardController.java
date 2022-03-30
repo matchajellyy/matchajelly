@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.dct.freeboard.service.IFreeBoardService;
@@ -51,7 +52,7 @@ public class BoardController {
 
 	// 글 등록 처리
 	@PostMapping("/registForm")
-	public String registForm(CommunitiesVO vo, RedirectAttributes ra) {
+	public String registForm(CommunitiesVO vo,  RedirectAttributes ra) {
 		service.regist(vo);
 
 		ra.addFlashAttribute("msg", "정상 등록 처리 되었습니다.");
@@ -61,21 +62,24 @@ public class BoardController {
 
 	// 글 상세보기 처리
 	@GetMapping("/freeBoardDetail")
-	public void getContent(@RequestParam("bno") int bno, @ModelAttribute("p") PageVO vo, Model model) {
-		model.addAttribute("article", service.getContent(bno));
+	public void getContent(@RequestParam("communityNo") int communityNo, @ModelAttribute("p") PageVO vo, Model model) {
+		System.out.println("글 상세보기" + service.getContent(communityNo));
+		model.addAttribute("article", service.getContent(communityNo));
 	}
 
 	// 글 수정 페이지 이동 처리
 	@GetMapping("/freeBoardModify")
-	public void modify(@RequestParam("bno") int bno, Model model) {
-		model.addAttribute("article", service.getContent(bno));
+	public void modify(@RequestParam("communityNo") int communityNo, Model model) {
+		model.addAttribute("article", service.getContent(communityNo));
 	}
 
 	// 글 수정 처리
 	@PostMapping("/freeBoardUpdate")
 	public String freeBoardUpdate(CommunitiesVO vo, RedirectAttributes ra) {
+		System.out.println("글 수정처리: "+ vo);
+		
 		service.update(vo);
-		ra.addFlashAttribute("msg", "updateSuccess");
+		ra.addFlashAttribute("msg", "수정이 완료되었습니다.");
 
 		return "redirect:/board/freeBoardDetail?communityNo=" + vo.getCommunityNo();
 	}
@@ -83,6 +87,8 @@ public class BoardController {
 	// 글 삭제 처리
 	@PostMapping("/freeBoardDelete")
 	public String freeBoardDelete(CommunitiesVO vo, RedirectAttributes ra) {
+		System.out.println("freeboard vo: " + vo);
+		System.out.println("freeboard vo: " + vo.getCommunityNo());
 		service.delete(vo.getCommunityNo());
 
 		ra.addFlashAttribute("msg", "게시글이 정상 삭제 되었습니다.");

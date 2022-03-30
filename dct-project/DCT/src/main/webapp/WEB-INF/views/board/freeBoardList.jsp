@@ -7,45 +7,31 @@
 
 <style>
 
-/* ---------------------- 자유게시판 ---------------------- */
-/* 타이틀 */
+}
+/* ---------- */
+
 section.community-header {
-	color: aliceblue;
-	font-size: 30px;
-	background-color: rgb(61, 58, 58);
-	padding: 1em 0;
+	padding: 10px 0 10px;
 }
-/* ---------- */
-/* 메뉴 */
-section.community-body nav.community-body-nav ul h6 {
-	color: purple;
-	font-size: 16px;
-	margin: 40px 0;
-}
-
-section.community-body nav.community-body-nav ul li {
-	margin: 20px 0;
-}
-
-section.community-body nav.community-body-nav ul li span {
-	color: plum;
-	font-size: 20px;
-}
-/* ---------- */
 .community-body-content {
 	padding: 0;
+	float: right;
+	margin-top: -40px;
 }
 
-.community-body .search-text {
+.community-body-content .search-text {
 	margin-top: 40px;
+	display: block;
+	margin-right: 8px;
 }
 
 .community-body .search-text .form-group {
 	margin: 0;
+	display: flex;
 }
 
 .community-body .community-body-write .write {
-	padding: 0;
+	padding: 10px;
 	text-align: right;
 }
 
@@ -65,6 +51,44 @@ section.community-body nav.community-body-nav ul li span {
 .community-body .community-body-content .pagination-list {
 	text-align: center;
 }
+
+.container .columns{
+	display: flex;
+}
+
+.container .columns .col-md-3{
+	display: inline;
+}
+
+/* 글쓰기 */
+.community-body-write{
+	display: inline;
+}
+
+/*aside*/
+.aside_menu {
+    float: left;
+}
+
+.aside_menu p{
+    font-size: 18px;
+}
+
+.aside_menu .menu-list .btn_wrap {
+	font-size: 15px;
+	color: #757575;
+}
+
+.aside_menu .menu-list a:hover, .aside_menu .menu-list a:focus {
+ color: #000;
+ background: #f2f2f2;
+ text-decoration: none;
+}
+
+.menu-label {
+	margin: 1px;
+}
+
 </style>
 
 <div id="wrapper">
@@ -73,39 +97,67 @@ section.community-body nav.community-body-nav ul li span {
 		<div class="container">
 			<div class="row">
 				<div class=" col-md-12">
-					<h2>자유게시판</h2>
+					<h3>자유게시판</h3>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<section class="community-body">
-		<div class="container">
-			<div class="row">
-				<nav class="community-body-nav col-md-2">
-					<ul class="">
-						<h6 class="">Dreams Come True</h6>
-						<li class=""><a href="#"><span>공지사항</span></a></li>
-						<li class=""><a href="#"><span>사이트 소개</span></a></li>
-					</ul>
-					<ul class="">
-						<h6 class="">커뮤니티</h6>
-						<li class=""><a href="<c:url value='/board/qnaBoardList' />"
-							class=""><span>질문 &amp; 답변</span></a></li>
-						<li class=""><a href="<c:url value='/board/freeBoardList' />"
-							class=""><span>자유게시판</span></a></li>
-					</ul>
-					<ul class="">
-						<h6 class="">후기</h6>
-						<li class=""><a href="#"><span>수강평</span></a></li>
-						<li class=""><a href="#"><span>멘토링 후기</span></a></li>
-					</ul>
-				</nav>
+            <div class="container">
+                <div class="columns">
+                    <div class="col-md-2">
+                        <div class="aside_menu">
+                            <aside class="sidebar_left">
+                                <div class="menu_container">
+                                    <p class="menu-label">공지사항</p>
+                                    <ul class="menu-list">
+                                        <li>
+                                            <a class="btn_wrap " href="<c:url value='/notice/noticeList' />">
+                                                <span>공지사항</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="btn_wrap " href="<c:url value='/notice/introduce' />">
+                                                <span>사이트 소개</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <p class="menu-label">강의</p>
+                                    <ul class="menu-list">
+                                        <li>
+                                            <a class="btn_wrap " href="<c:url value='/lecture/lecturePage' />">
+                                                <span>전체 강의</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="btn_wrap " href="<c:url value='/lecture/lectureEva' />">
+                                                <span>수강평</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <p class="menu-label">커뮤니티</p>
+                                    <ul class="menu-list">
+                                        <li>
+                                            <a class="btn_wrap " href="<c:url value='/board/freeBoardList' />">
+                                                <span>자유게시판</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="btn_wrap " href="<c:url value='/notice/frequentqna' />">
+                                                <span>자주 묻는 질문</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+
 
 				<div class="community-body-content col-md-10">
 					<div class="search-text">
 						<form action="<c:url value='/board/freeBoardList' />">
-							<div class="col-md-2"></div>
+							<div class="col-md-5"></div>
 							<div class="form-group col-md-2">
 								<select id="condition" class="form-control" name="condition">
 									<option value="title"
@@ -121,24 +173,19 @@ section.community-body nav.community-body-nav ul li span {
 							<div class="form-group col-md-4">
 								<div class="input-group">
 									<input type="text" class="form-control" name="keyword"
-										value="${pc.paging.keyword}"> <span
-										class="input-group-btn">
-										<button type="submit" class="btn btn-cpp btn-flat">
-											검색</button>
+										value="${pc.paging.keyword}">
+										<span class="input-group-btn">
+										<button type="submit" class="btn btn-cpp btn-flat">검색</button>
 									</span>
 								</div>
 							</div>
-							<div class="col-md-2"></div>
-							<div class="col-md-2"></div>
 						</form>
 					</div>
 
 					<div class="community-body-write">
 						<form action="#">
-							<div class="col-md-10"></div>
-							<div class="write col-md-2">
-								<button type="button" class="btn btn-success"
-									onclick="location.href='<c:url value="/board/freeBoardRegist" />'">글쓰기</button>
+							<div class="write col-md-1">
+								<button type="button" class="btn btn-success" onclick="location.href='<c:url value="/board/freeBoardRegist" />'" style="background:#424242; border:1px solid #fff; font-size: 14px;">글쓰기</button>
 							</div>
 						</form>
 					</div>
@@ -149,7 +196,6 @@ section.community-body nav.community-body-nav ul li span {
 								<tr class="active">
 									<th class="col-md-6">제목</th>
 									<th class="col-md-2">글쓴이</th>
-									<th class="col-md-2">조회수</th>
 									<th class="col-md-2">날짜</th>
 								</tr>
 							</thead>
@@ -157,14 +203,12 @@ section.community-body nav.community-body-nav ul li span {
 								<c:forEach var="vo" items="${boardList}">
 	                                <tr>
 	                                    <td>
-	                                    	<a href="<c:url value='/board/freeBoardDetail?bno=${vo.communityNo}&pageNum=${pc.paging.pageNum}&keyword=${pc.paging.keyword}&condition=${pc.paging.condition}' />">
-	                                    	${vo.communityTitle}
-	                                    	</a>
+	                                    	<a href="<c:url value='/board/freeBoardDetail?communityNo=${vo.communityNo}&pageNum=${pc.paging.pageNum}&keyword=${pc.paging.keyword}&condition=${pc.paging.condition}' />">
+                                            ${vo.communityTitle}
+                                            </a>
 	                                    </td>
-	                                    <td>${vo.userNo}</td>
-	                                    <td>${vo.communityViewCount}</td>
-	                                    <td><fmt:formatDate value="${vo.communityCreateDate}" 
-	                                    		pattern="yyyy-MM-dd HH:mm:ss" /> </td>
+	                                    <td>${vo.userName}</td>
+	                                    <td><fmt:formatDate value="${vo.communityCreateDate}" pattern="yy-MM-dd HH:mm" /> </td>
 	                                </tr>
                                 </c:forEach>
 							</tbody>
@@ -174,7 +218,7 @@ section.community-body nav.community-body-nav ul li span {
 
 					<nav class="pagination-list">
 						<form action="<c:url value='/board/freeBoardList' />" name="pageForm">
-							<div>
+							<div style="text-align: center;">
 								<hr>
 								<ul class="pagination" id="pagination">
 									<c:if test="${pc.prev}">
@@ -201,11 +245,10 @@ section.community-body nav.community-body-nav ul li span {
 							</div>
 						</form>
 					</nav>
-
 				</div>
 			</div>
-		</div>
-	</section>
+         </div>
+
 
 	<%@ include file="../include/footer.jsp"%>
 

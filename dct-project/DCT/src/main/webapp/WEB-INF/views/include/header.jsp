@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="<c:url value='/css/bootstrap.css' />">
     <link rel="stylesheet" href="<c:url value='/css/main.css' />">
     
+    <!-- ck 에디터 관련 -->
+	<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" /> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    
    	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="<c:url value='/js/bootstrap.js' />"></script>
     
@@ -64,29 +69,22 @@
 			</div>
 			<div class="navbar-menu">
 				<div class="navbar-left">
-					<div class="">
-						<a href="<c:url value='/lecture/lecturePage' />" class=""><span>강의</span></a>
-					</div>
-					<div class="">
-						<a href="<c:url value='/lecture/mentoringList' />" class=""><span>멘토링</span></a>
-					</div>
-					<div class="">
-						<a href="<c:url value='/board/freeBoardList' />" class=""><span>커뮤니티</span></a>
-					</div>
-					<div class="">
-						<a href="#" class=""><span class="">공지사항</span></a>
-					</div>
+						<li><a role="button" href="<c:url value='/lecture/lecturePage' />" class="btn-lecture"><span>강의</span></a></li>
+						<li><a role="button" href="<c:url value='/mentor/mentoringList' />" class="btn-mentoring"><span>멘토링</span></a></li>
+						<li><a role="button" href="<c:url value='/board/freeBoardList' />" class="btn-community"><span>커뮤니티</span></a></li>
+						<li><a role="button" href="<c:url value='/notice/noticeList' />" class="btn-notice"><span>공지사항</span></a></li>
+						<div class="effect"></div>
 				</div>
 				<div class="navbar-right">
 					<div class="btn-movement">
 						<c:choose>
 							<c:when test="${login == null}">
-								<a role="button" href="#" class="btn-login" data-toggle="modal" data-target="#loginModal">로그인</a>
-								<a role="button" href="<c:url value='/user/userJoin' />" class="btn-sign-in">회원가입</a>
+								<li><a role="button" href="#" class="btn-login" data-toggle="modal" data-target="#loginModal">로그인</a></li>
+								<li><a role="button" href="<c:url value='/user/userJoin' />" class="btn-sign-in">회원가입</a></li>
 							</c:when>
 							<c:otherwise>
-								<a role="button" href="<c:url value='/user/userMypage' />" class="btn-mypage">마이페이지</a>
-								<a role="button" href="<c:url value='/user/logout'/>" class="btn-logout">로그아웃</a>	
+								<li><a role="button" href="<c:url value='/user/userMypage' />" class="btn-mypage">마이페이지</a></li>
+								<li><a role="button" href="<c:url value='/user/logout'/>" class="btn-logout">로그아웃</a></li>	
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -110,19 +108,24 @@
 					<img class="logo" src="<c:url value='/img/logo.png' />" alt="modal-header-logo">
 				</div>
 				<div class="modal-body">
-					<input type="text" name="userId" id="signInId" placeholder="아이디를 입력해 주세요.">
-					<input type="password" name="userPw" id="signInPw" placeholder="비밀번호를 입력해 주세요.">
-					<input type="checkbox" name="auto-login" checked="checked" id="auto-login"  style="border: 1px solid #000; width: 15px; height: 15px; text-align:left"> 자동로그인
+					<input type="text" name="userId" id="signInId" placeholder="아이디를 입력해 주세요."  style="font-size:14px;">
+					<input type="password" name="userPw" id="signInPw" placeholder="비밀번호를 입력해 주세요."  style="font-size:14px;">
+				</div>
+				<div class="modal-body-check">
+					<input type="checkbox" name="auto-login" class="input-auto" checked="checked" id="auto-login"><p>자동로그인</p>
 				</div>
 				<div class="modal-sign-more">
-					<a href="<c:url value='/user/userIdSearch' />">아이디 찾기</a>
-					<a href="<c:url value='/user/userPwSearch' />">비밀번호 찾기</a>
-					<a href="<c:url value='/user/userJoin' />">회원가입</a>
+					<a href="<c:url value='/user/userIdSearch' />" style="font-size:14px;">아이디 찾기</a>
+					<a href="<c:url value='/user/userPwSearch' />" style="font-size:14px;">비밀번호 찾기</a>
+					<a href="<c:url value='/user/userJoin' />" style="font-size:14px;">회원가입</a>
 				</div>
 				<div class="btn-modal-footer">
-					<button type="button" id="loginBtn" class="btn btn-success" data-dismiss="modal" >로그인</button>
+					<button type="button" id="loginBtn" class="btn btn-success" data-dismiss="modal">로그인</button>
 				</div>
-				<span id="idCheck"></span><span id="pwCheck"></span>					
+				<div class="span-check">
+					<span id="idCheck"></span>
+					<span id="pwCheck"></span>
+				</div>					
 			</div>
 		</form>
 	</div>
@@ -153,102 +156,96 @@
 		});
 		
 		// 로그인 ID 입력값 검증(공백, 정규표현식)
-		$('#signInId').keyup(function() {
-			
-	     	const getIdCheck = RegExp(/^[a-zA-Z0-9]{4,14}$/);
-	     	
-			if($(this).val() === '') {
-				$('#idCheck').css('background-color', 'pink');
-				$('#idCheck').html('<b style="font-size: 14px; color: red;">[아이디를 입력해주세요.]</b>');
-				chk1 = false;
-			} else if(!getIdCheck.test($(this).val())) {
-				$('#idCheck').css('background-color', 'pink');
-				$('#idCheck').html('<b style="font-size: 14px; color: red;">[영문자, 숫자 포함 4-14자 입니다.]</b>');
-				chk1 = false;
-			} else {
-				$('#idCheck').html('<b style="font-size: 14px; color: green;">[아이디 입력 완료]</b>');
-				chk1 = true;
-			}
-		}); // 로그인 ID 검증
-		
-		// 로그인 비밀번호 입력값 검증 (공백, 정규표현식)
-		$('#signInPw').keyup(function() {
-			
-			const getPwCheck = RegExp(/^[a-zA-Z0-9]{4,14}$/);
-			
-			if($(this).val() === '') {
-				$('#pwCheck').css('background-color', 'pink');
-				$('#pwCheck').html('<b style="font-size: 14px; color: red;">[비밀번호를 입력해주세요.]</b>');
-				chk2 = false;
-			} else if(!getPwCheck.test($(this).val())) {
-				$('#pwCheck').css('background-color', 'pink');
-				$('#pwCheck').html('<b style="font-size: 14px; color: red;">[영문자, 숫자 포함 4-14자 입니다.]</b>');
-				chk2 = false;
-				
-			} else {
-				$('#pwCheck').html('<b style="font-size: 14px; color: green;">[비밀번호 입력 완료]</b>');
-				chk2 = true;
-			}
-		}); // 로그인 비밀번호 검증
-		
-		$('#loginBtn').click(function() {
-	        
-	        if(chk1 && chk2) {
-	            
-	            const id = $('#signInId').val();
-	            const pw = $('#signInPw').val();
-	            
-	            const autoLogin = $('#auto-login').is(':checked');
-	            
-	            console.log('id: ' + id);
-	            console.log('pw: ' + pw);
-	            
-	            const userInfo = {
-	                "userId" : id,
-	                "userPw" : pw,
-	                "autoLogin" : autoLogin
-	            };
-	            
-	            $.ajax({
-	                type : "POST",
-	                url : "/user/loginCheck",
-	                contentType : "application/json",
-	                dataType : "text",
-	                data : JSON.stringify(userInfo),
-	                success : function(data) {
-	                    if(data === 'idFail') {
-	                        // console.log('아이디가 없습니다.');
-	                        $('#signInId').css('background-color', 'pink');
-	                        $('#signInId').html('<b style="font-size: 14px; color: red;">[아이디가 존재하지 않습니다.]</b>');
-	                        $('#signInId').val('');
-	                        $('#signInId').focus(); // 커서를 이동시키고, 스크롤도 해당 위치로 이동시키는 함수
-	                        chk1 = false, chk2 = false;
-	                        alert('아이디가 없습니다');
-	                    } else if(data === 'pwFail') {
-	                        // console.log('비밀번호가 틀렸습니다.');
-	                        $('#signInPw').css('background-color', 'pink');
-	                        $('#signInPw').html('<b style="font-size: 14px; color: red;">[비밀번호가 틀렸습니다.]</b>');
-	                        $('#signInPw').val('');
-	                        $('#signInPw').focus();
-	                        chk2 = false;
-	                    } else {
-	                        // console.log('로그인 성공');
-	                        alert('로그인 성공');
-	                        location.href = '/';
-	                    }
-	                },
-	                error : function() {
-	                    console.log('통신 실패!');
-	                    
-	                } 
-	                
-	            }); //end ajax (로그인 비동기 처리)
-	                
-	        } else {
-	            alert('입력 정보를 다시 확인하세요!');
-	        }
+        $('#signInId').keyup(function() {
+            
+             const getIdCheck = RegExp(/^[a-zA-Z0-9]{4,14}$/);
+             
+            if($(this).val() === '') {
+                $('#idCheck').html('<b style="font-size: 13px; background-color: #e9e9e9; color: rgb(216, 90, 90);">[아이디를 입력해주세요.]</b>');
+                chk1 = false;
+            } else if(!getIdCheck.test($(this).val())) {
+                $('#idCheck').html('<b style="font-size: 13px; background-color: #e9e9e9; color: rgb(216, 90, 90);">[영문자, 숫자 포함 4-14자 입니다.]</b>');
+                chk1 = false;
+            } else {
+                $('#idCheck').html('<b style="font-size: 13px; color: #000;">[아이디 입력 완료]</b>');
+                chk1 = true;
+            }
+        }); // 로그인 ID 검증
+        
+        // 로그인 비밀번호 입력값 검증 (공백, 정규표현식)
+        $('#signInPw').keyup(function() {
+            
+            const getPwCheck = RegExp(/^[a-zA-Z0-9]{4,14}$/);
+            
+            if($(this).val() === '') {
+                $('#pwCheck').html('<b style="font-size: 13px; background-color: #e9e9e9; color: rgb(216, 90, 90);">[비밀번호를 입력해주세요.]</b>');
+                chk2 = false;
+            } else if(!getPwCheck.test($(this).val())) {
+                $('#pwCheck').html('<b style="font-size: 13px; background-color: #e9e9e9; color: rgb(216, 90, 90);">[영문자, 숫자 포함 4-14자 입니다.]</b>');
+                chk2 = false;
+                
+            } else {
+                $('#pwCheck').html('<b style="font-size: 13px; color: #000;">[비밀번호 입력 완료]</b>');
+                chk2 = true;
+            }
+        }); // 로그인 비밀번호 검증
+        
+        $('#loginBtn').click(function() {
+            
+            if(chk1 && chk2) {
+                
+                const id = $('#signInId').val();
+                const pw = $('#signInPw').val();
+                
+                const autoLogin = $('#auto-login').is(':checked');
+                
+                console.log('id: ' + id);
+                console.log('pw: ' + pw);
+                
+                const userInfo = {
+                    "userId" : id,
+                    "userPw" : pw,
+                    "autoLogin" : autoLogin
+                };
+                
+                $.ajax({
+                    type : "POST",
+                    url : "/user/loginCheck",
+                    contentType : "application/json",
+                    dataType : "text",
+                    data : JSON.stringify(userInfo),
+                    success : function(data) {
+                        if(data === 'idFail') {
+                            // console.log('아이디가 없습니다.');
+                            $('#signInId').html('<b style="font-size: 14px; background: pink; color: red;">[아이디가 존재하지 않습니다.]</b>');
+                            $('#signInId').val('');
+                            $('#signInId').focus(); // 커서를 이동시키고, 스크롤도 해당 위치로 이동시키는 함수
+                            chk1 = false, chk2 = false;
+                            alert('아이디가 없습니다');
+                        } else if(data === 'pwFail') {
+                            // console.log('비밀번호가 틀렸습니다.');
+                            $('#signInPw').html('<b style="font-size: 14px; background: pink; color: red;">[비밀번호가 틀렸습니다.]</b>');
+                            $('#signInPw').val('');
+                            $('#signInPw').focus();
+                            chk2 = false;
+                        } else {
+                            // console.log('로그인 성공');
+                            alert('로그인 성공');
+                            location.href = '/';
+                        }
+                    },
+                    error : function() {
+                        console.log('통신 실패!');
+                        
+                    } 
+                    
+                }); //end ajax (로그인 비동기 처리)
+                    
+            } else {
+                alert('입력 정보를 다시 확인하세요!');
+            }
 
-	    }); //로그인 버튼 이벤트 끝
+        }); //로그인 버튼 이벤트 끝
 		
 		/* 위로가기 버튼 */ 
 		$(document).ready(function() {
@@ -266,6 +263,14 @@
 				return false;
 			});
 		}); // 위로가기 버튼 이벤트 끝
+		
+		// 로그아웃
+		$('.btn-logout').click(function() {
+			const logout = confirm('로그아웃 하시겠습니까?');
+			if(logout) {
+				alert('로그아웃 되었습니다.');
+			} 
+		});
 		
 	}); //end JQuery       
 

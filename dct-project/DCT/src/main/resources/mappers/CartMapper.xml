@@ -70,7 +70,7 @@
 	</select>
 		
 	<!--  장바구니에 담긴 상품 찾기 (사용자) -->
-	<select id="getCartItemsByUserNo" resultMap="cart">
+	<select id="getCartItemsByUserNo" resultType="map">
 		SELECT
 			c.CART_NO					as cartNo,
 			c.LECTURE_NO				as lectureNo,

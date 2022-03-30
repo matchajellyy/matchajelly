@@ -5,34 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.dct.freeboard.service.IFreeBoardService;
 import com.spring.dct.notice.service.INoticeService;
 import com.spring.dct.util.PageCreator;
 import com.spring.dct.util.PageVO;
-import com.spring.dct.vo.CommunitiesVO;
 
 @Controller
 @RequestMapping("/notice")
 public class NoticeController {
-	
-	
-	@GetMapping("/introduce")
-	public String introduce() {
-		System.out.println("소개 - introduce");
-		return "notice/introduce";
-	}
-	
-	@GetMapping("/frequentqna")
-	public String freequenceqna() {
-		System.out.println("자주하는 질문 - frequentqna");
-		return "notice/frequentqna";
-	}
-
 
 	@Autowired
 	private INoticeService service;
@@ -64,6 +46,12 @@ public class NoticeController {
 	public void getContent(@RequestParam("bno") int bno, @ModelAttribute("p") PageVO vo, Model model) {
 		model.addAttribute("article", service.getContent(bno));
 	}
+	
+	@GetMapping("/introduce")
+	public void introduce() {}
+
+	@GetMapping("/frequentqna")
+	public void frequentqna() {}
 
 
 }

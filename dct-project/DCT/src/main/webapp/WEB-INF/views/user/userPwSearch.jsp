@@ -41,7 +41,17 @@
 		text-align: center;
 		margin-top: 20px;
 	}
-	
+	.pw-search-body {
+		width: 35%; 
+		text-align: center;
+		margin: 0 auto;
+		
+	}
+	.pw-search-body input {
+		margin: 5px;
+	}
+
+	 
 </style>
 
 	<div class="wrapper">
@@ -51,55 +61,71 @@
 			<div class="container">
 				<div class="row">
 					<div class="pw-search-header">
-						<h1>비밀번호 찾기</h1>
-                    </div>
+						<h4>비밀번호 찾기</h4>
+                    </div> 
 				</div>
 				<div class="row">
                     <div class="pw-search-body">
-                        <p>
-                            비밀번호가 기억나지 않으세요?
-                            <br>
-                            Dream Come True에 가입한 아이디 정확히 입력해 주세요.
-                            <br>
-                            가입한 아이디 정보의 이메일을 통해 비밀번호 수정 링크가 전송됩니다.
-                        </p>
-                    </div>
-				</div>
-				<div class="row">
-                    <div class="pw-search-footer">
-                        <input type="text" placeholder="아이디를 입력해주세요.">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#searchPwModal" >찾기</button>
-                    </div>
-				</div>
+                   	<div class="form-group">
+                       	<input type="email" class="form-control form-control-user" id="userEmail" name="userEmail" placeholder="가입하신 이메일을 입력해 주세요.">
+                       	<input type="text" class="form-control form-control-user" id="userId" name="userId" placeholder="가입하신 id를 입력해 주세요.">
+                       </div>
+                       <button type="button" class="btn btn-success" id="mail-check-btn" style="margin-top: -5px;">이메일인증</button>
+                        <div class="mail-check-box">
+        				 <input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력하세요." maxlength="6" style="margin-top: 20px">
+       				 </div>
+       				 <span id="mail-check-warning" style="font-size: 14px;"></span>
+                       <button type="button" class="btn btn-info" id="mail-check" href="<c:url value='/user/userPwNew' />">인증번호 확인</button>
+                       
+               		</div> 
+				</div> 
 			</div>
 		</section>
 
 		<%@ include file="../include/footer.jsp"%>
-
-        <!-- Modal -->
-        <div id="searchPwModal" class="modal fade">
-            <div class="modal-dialog">
-                <!-- Modal Centent-->
-                <div class="modal-content search-pw-modal">
-                    <div class="modal-header-logo">
-                        <img class="logo" src="<c:url value='/img/logo.png' />" alt="modal-header-logo">
-                    </div>
-                    <div class="modal-body">
-                        <span class="description">
-                            <p>test@test.com <br>
-	                            위 주소로 비밀번호 설정 메일이 전송되었습니다. 💌<br>
-	                            메일을 확인해주세요.<br>
-                                <span style="font-size: 12px;">
-                                    (몇분내로 확인되지 않으면 스팸 폴더를 확인해주세요!)
-                                </span>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="search-pw-modal-footer">
-                        <button class="btn btn-primary">확인</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 	</div>
 	
+<script>
+// 이메일 인증번호 전송
+$('#mail-check-btn').click(function() {
+	const email = $('#userEmail').val();
+	console.log('인증번호 보낼 이메일: ' + email);
+	const checkInput = $('.mail-check-input'); // 인증번호 입력 하는 곳
+	
+	$.ajax({
+		type : 'get',
+		url : '<c:url value="/user/mailCheck?email=" />' + email,
+		success : function(data) {
+			console.log('data: ' + data);
+			checkInput.attr('disabled', false);
+			code = data;
+			alert('인증번호 전송되었습니다. 확인 후 입력란에 정확히 입력하세요.');
+		}
+		
+	}); // end ajax (이메일 인증번호 전송)
+	
+}); // 이메일 인증번호 전송
+
+// 인증번호 비교
+// blur()는 focus가 벗어나면 이벤트 발생 
+$('.mail-check-input').blur(function() {
+	const inputCode = $(this).val();
+	const $resultMsg = $('#mail-check-warning');
+	
+	if(inputCode === code) {
+		$resultMsg.html('인증번호가 일치합니다.');
+		$resultMsg.css('color', 'green');
+		$('#mail-check-btn').attr('disabled', true);
+		// disabled를 적용하면 서버로 이동이 안된다. readonly인 읽기전용으로 해야 한다.
+		$('#userEmail').attr('readonly', true);
+		$('#userId').attr('readonly', true);
+		$('#userEmail').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+		$('#userId').attr('onChange', 'this.selectedIndex = this.initialSelect');
+        location.href = '/user/userPwNew/' + $('#userId').val();
+	} else {
+		$resultMsg.html('인증번호를 다시 확인해 주세요.');
+		$resultMsg.css('color', 'red');
+	}
+	
+}); // 인증번호 비교
+</script>

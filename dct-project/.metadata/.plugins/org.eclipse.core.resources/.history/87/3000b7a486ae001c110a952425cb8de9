@@ -1,0 +1,706 @@
+package com.spring.dct.user.mapper;
+
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.spring.dct.vo.UsersVO;
+
+public interface IUserMapper {
+
+	// 아이디 중복 확인
+	int idCheck(String id);
+	
+	// 회원 가입
+	void join(UsersVO vo);
+	
+	// 로그인
+	UsersVO login(@Param("id") String id, @Param("pw") String pw);
+	
+	// 회원 정보 얻어오기
+	UsersVO getInfo(String id);
+	
+	// 회원 정보 수정
+	void updateUser(UsersVO vo);
+	
+	//로그인 유지
+	void keepLogin(Map<String, Object> datas);
+	
+	// 회원 정보 삭제
+	void deleteUser(UsersVO vo);
+
+	// 세션 아이디를 통한 회원 정보 조회 기능
+	UsersVO getUserWithSessionId(String seesionId);
+	
+	//유저가 올린 강의 불러오기
+	UsersVO getUploadList(String id);
+	
+	//아이디 찾기
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 서버 버전 이름:    Apache Tomcat/9.0.55
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: Server 빌드 시각:  Nov 10 2021 08:26:45 UTC
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: Server 버전 번호:  9.0.55.0
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 운영체제 이름:     Windows 10
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 운영체제 버전:     10.0
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 아키텍처:          amd64
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 자바 홈:           C:\Program Files\Java\jdk-11.0.12
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: JVM 버전:          11.0.12+8-LTS-237
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: JVM 벤더:          Oracle Corporation
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: CATALINA_BASE:     C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: CATALINA_HOME:     C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 명령 행 아규먼트:  -Dcatalina.base=C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 명령 행 아규먼트:  -Dcatalina.home=C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 명령 행 아규먼트:  -Dwtp.deploy=C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\wtpwebapps
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.startup.VersionLoggerListener log
+	INFO: 명령 행 아규먼트:  -Dfile.encoding=UTF-8
+	3월 28, 2022 7:32:04 오후 org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+	INFO: 프로덕션 환경들에서 최적의 성능을 제공하는, APR 기반 Apache Tomcat Native 라이브러리가, 다음 java.library.path에서 발견되지 않습니다: [C:\Program Files\Java\jdk-11.0.12\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\WiTHUS\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\WiTHUS\AppData\Local\Programs\Python\Python38\;C:\Users\WiTHUS\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk-17\bin;C:\Users\WiTHUS\AppData\Local\Programs\Microsoft VS Code\bin;C:\ProgramData\WiTHUS\GitHubDesktop\bin;C:\Users\WiTHUS\AppData\Local\GitHubDesktop\bin;.]
+	3월 28, 2022 7:32:05 오후 org.apache.coyote.AbstractProtocol init
+	INFO: 프로토콜 핸들러 ["http-nio-8181"]을(를) 초기화합니다.
+	3월 28, 2022 7:32:05 오후 org.apache.catalina.startup.Catalina load
+	INFO: [1422] 밀리초 내에 서버가 초기화되었습니다.
+	3월 28, 2022 7:32:05 오후 org.apache.catalina.core.StandardService startInternal
+	INFO: 서비스 [Catalina]을(를) 시작합니다.
+	3월 28, 2022 7:32:05 오후 org.apache.catalina.core.StandardEngine startInternal
+	INFO: 서버 엔진을 시작합니다: [Apache Tomcat/9.0.55]
+	3월 28, 2022 7:32:05 오후 org.apache.catalina.startup.HostConfig deployDescriptor
+	INFO: 배치 descriptor [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\conf\Catalina\localhost\ROOT.xml]을(를) 배치합니다.
+	3월 28, 2022 7:32:05 오후 org.apache.catalina.startup.HostConfig deployDescriptor
+	WARNING: 배치 descriptor [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\conf\Catalina\localhost\ROOT.xml] 내에서, [] 값을 가진 path 속성은 무시됩니다.
+	3월 28, 2022 7:32:05 오후 org.apache.catalina.startup.HostConfig deployDescriptor
+	WARNING: 외부 docBase를 사용하여 배치 descriptor [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\conf\Catalina\localhost\ROOT.xml]을(를) 배치하는 것은, appBase 내의 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\ROOT]이(가) 무시될 것을 의미합니다.
+	3월 28, 2022 7:32:09 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:32:09 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:32:09 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:32:09 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 2970 ms
+	3월 28, 2022 7:32:13 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2641 ms
+	3월 28, 2022 7:32:15 오후 org.apache.catalina.startup.HostConfig deployDescriptor
+	INFO: 배치 descriptor [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\conf\Catalina\localhost\ROOT.xml]의 배치가 [10,459] 밀리초 내에 완료되었습니다.
+	3월 28, 2022 7:32:15 오후 org.apache.catalina.startup.HostConfig deployDirectory
+	INFO: 웹 애플리케이션 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\docs]을(를) 배치합니다.
+	3월 28, 2022 7:32:15 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:32:15 오후 org.apache.catalina.startup.HostConfig deployDirectory
+	INFO: 웹 애플리케이션 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\docs]에 대한 배치가 [50] 밀리초에 완료되었습니다.
+	3월 28, 2022 7:32:15 오후 org.apache.catalina.startup.HostConfig deployDirectory
+	INFO: 웹 애플리케이션 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\examples]을(를) 배치합니다.
+	3월 28, 2022 7:32:16 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:32:16 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: ContextListener: contextInitialized()
+	3월 28, 2022 7:32:16 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: SessionListener: contextInitialized()
+	3월 28, 2022 7:32:16 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: ContextListener: attributeAdded('StockTicker', 'async.Stockticker@14d44e72')
+	3월 28, 2022 7:32:16 오후 org.apache.catalina.startup.HostConfig deployDirectory
+	INFO: 웹 애플리케이션 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\examples]에 대한 배치가 [673] 밀리초에 완료되었습니다.
+	3월 28, 2022 7:32:16 오후 org.apache.catalina.startup.HostConfig deployDirectory
+	INFO: 웹 애플리케이션 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\host-manager]을(를) 배치합니다.
+	3월 28, 2022 7:32:16 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:32:16 오후 org.apache.catalina.startup.HostConfig deployDirectory
+	INFO: 웹 애플리케이션 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\host-manager]에 대한 배치가 [99] 밀리초에 완료되었습니다.
+	3월 28, 2022 7:32:16 오후 org.apache.catalina.startup.HostConfig deployDirectory
+	INFO: 웹 애플리케이션 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\manager]을(를) 배치합니다.
+	3월 28, 2022 7:32:16 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:32:16 오후 org.apache.catalina.startup.HostConfig deployDirectory
+	INFO: 웹 애플리케이션 디렉토리 [C:\Users\WiTHUS\Desktop\java_web_jiin\apache-tomcat-9.0.55\apache-tomcat-9.0.55\webapps\manager]에 대한 배치가 [66] 밀리초에 완료되었습니다.
+	3월 28, 2022 7:32:16 오후 org.apache.coyote.AbstractProtocol start
+	INFO: 프로토콜 핸들러 ["http-nio-8181"]을(를) 시작합니다.
+	3월 28, 2022 7:32:17 오후 org.apache.catalina.startup.Catalina start
+	INFO: 서버가 [12459] 밀리초 내에 시작되었습니다.
+	WARNING: An illegal reflective access operation has occurred
+	WARNING: Illegal reflective access by org.apache.ibatis.reflection.Reflector (file:/C:/Users/WiTHUS/Desktop/java_web_jiin/apache-tomcat-9.0.55/apache-tomcat-9.0.55/wtpwebapps/DCT/WEB-INF/lib/mybatis-3.4.6.jar) to method java.lang.Integer.getChars(int,int,byte[])
+	WARNING: Please consider reporting this to the maintainers of org.apache.ibatis.reflection.Reflector
+	WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+	WARNING: All illegal access operations will be denied in a future release
+	totalCount : 18
+	todayCount : 18
+	메인페이지
+	totalCount : 19
+	todayCount : 19
+	메인페이지
+	메인페이지
+	userIdSearch 페이지 진입
+	WARN : org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'email' for method parameter type String is not present]
+	메인페이지
+	3월 28, 2022 7:34:40 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:34:40 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:34:40 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:34:40 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:34:43 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:34:43 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:34:43 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:34:43 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 2303 ms
+	3월 28, 2022 7:34:46 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2847 ms
+	3월 28, 2022 7:34:49 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	userIdSearch 페이지 진입
+	userIdSearch 페이지 진입
+	WARN : org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'email' for method parameter type String is not present]
+	3월 28, 2022 7:37:07 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:37:07 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:37:07 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:37:07 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:37:10 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:37:10 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:37:10 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:37:10 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 2376 ms
+	3월 28, 2022 7:37:13 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2779 ms
+	3월 28, 2022 7:37:15 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	userIdSearch 페이지 진입
+	메인페이지
+	userIdSearch 페이지 진입
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	3월 28, 2022 7:39:21 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:39:21 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:39:21 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:39:21 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:39:24 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:39:24 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:39:24 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:39:24 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 2054 ms
+	3월 28, 2022 7:39:26 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2164 ms
+	3월 28, 2022 7:39:28 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	3월 28, 2022 7:40:17 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:40:17 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:40:17 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:40:17 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:40:19 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:40:19 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:40:19 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:40:19 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 1796 ms
+	3월 28, 2022 7:40:22 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2399 ms
+	3월 28, 2022 7:40:24 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	userIdSearch 페이지 진입
+	3월 28, 2022 7:40:39 오후 org.apache.catalina.core.StandardWrapperValve invoke
+	SEVERE: 경로 []의 컨텍스트 내의 서블릿 [appServlet]을(를) 위한 Servlet.service() 호출이, 근본 원인(root cause)과 함께, 예외 [Handler dispatch failed; nested exception is java.lang.Error: Unresolved compilation problem: 
+		This method must return a result of type String
+	]을(를) 발생시켰습니다.
+	java.lang.Error: Unresolved compilation problem: 
+		This method must return a result of type String
+
+		at com.spring.dct.controller.UserController.searchId(UserController.java:303)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+		at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+		at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+		at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+		at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+		at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+		at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+		at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+		at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+		at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+		at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+		at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+		at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+		at java.base/java.lang.Thread.run(Thread.java:834)
+
+	userIdSearch 페이지 진입
+	3월 28, 2022 7:40:41 오후 org.apache.catalina.core.StandardWrapperValve invoke
+	SEVERE: 경로 []의 컨텍스트 내의 서블릿 [appServlet]을(를) 위한 Servlet.service() 호출이, 근본 원인(root cause)과 함께, 예외 [Handler dispatch failed; nested exception is java.lang.Error: Unresolved compilation problem: 
+		This method must return a result of type String
+	]을(를) 발생시켰습니다.
+	java.lang.Error: Unresolved compilation problem: 
+		This method must return a result of type String
+
+		at com.spring.dct.controller.UserController.searchId(UserController.java:303)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+		at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+		at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+		at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+		at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+		at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+		at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+		at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+		at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+		at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+		at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+		at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+		at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+		at java.base/java.lang.Thread.run(Thread.java:834)
+
+	3월 28, 2022 7:40:44 오후 org.apache.catalina.core.StandardWrapperValve invoke
+	SEVERE: 경로 []의 컨텍스트 내의 서블릿 [appServlet]을(를) 위한 Servlet.service() 호출이, 근본 원인(root cause)과 함께, 예외 [Handler dispatch failed; nested exception is java.lang.Error: Unresolved compilation problem: 
+		This method must return a result of type String
+	]을(를) 발생시켰습니다.
+	java.lang.Error: Unresolved compilation problem: 
+		This method must return a result of type String
+
+		at com.spring.dct.controller.UserController.searchId(UserController.java:303)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+		at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+		at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+		at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+		at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+		at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+		at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+		at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+		at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+		at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+		at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+		at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+		at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+		at java.base/java.lang.Thread.run(Thread.java:834)
+
+	3월 28, 2022 7:40:48 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:40:48 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:40:48 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:40:48 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:40:50 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:40:50 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:40:50 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:40:50 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 1969 ms
+	3월 28, 2022 7:40:53 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3633 ms
+	3월 28, 2022 7:40:56 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	userIdSearch 페이지 진입
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	3월 28, 2022 7:43:02 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:43:02 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:43:02 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:43:02 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:43:04 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:43:04 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:43:04 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:43:04 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 1930 ms
+	3월 28, 2022 7:43:07 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2355 ms
+	3월 28, 2022 7:43:09 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	userIdSearch 페이지 진입
+	userIdSearch 페이지 진입
+	userIdSearch 페이지 진입
+	userIdSearch 페이지 진입
+	메인페이지
+	userIdSearch 페이지 진입
+	userIdSearch 페이지 진입
+	/user/searchId: POST
+	param: userEmail=
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	3월 28, 2022 7:51:38 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:51:38 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:51:38 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:51:38 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:51:41 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:51:41 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:51:41 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:51:41 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 1795 ms
+	3월 28, 2022 7:51:43 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2253 ms
+	3월 28, 2022 7:51:46 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	userIdSearch 페이지 진입
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	userIdSearch 페이지 진입
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	userIdSearch 페이지 진입
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	3월 28, 2022 7:54:53 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:54:53 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:54:53 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:54:53 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:54:56 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:54:56 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:54:56 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:54:56 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 1732 ms
+	3월 28, 2022 7:54:58 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2019 ms
+	3월 28, 2022 7:55:00 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	userIdSearch 페이지 진입
+	3월 28, 2022 7:56:38 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:56:38 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:56:38 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:56:38 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:56:40 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:56:40 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:56:40 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:56:40 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 1641 ms
+	3월 28, 2022 7:56:42 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2299 ms
+	3월 28, 2022 7:56:45 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	userIdSearch 페이지 진입
+	3월 28, 2022 7:56:55 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 7:56:55 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 7:56:55 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 7:56:55 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 7:56:57 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 7:56:57 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 7:56:58 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 7:56:58 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+	WARN : com.zaxxer.hikari.util.DriverDataSource - Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 1640 ms
+	3월 28, 2022 7:56:59 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring DispatcherServlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'appServlet'
+	INFO : org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2203 ms
+	3월 28, 2022 7:57:02 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 것을 완료했습니다.
+	userIdSearch 페이지 진입
+	메인페이지
+	/user/searchId: POST
+	param: userEmail=123%40google.com
+	3월 28, 2022 7:57:04 오후 org.apache.catalina.core.StandardWrapperValve invoke
+	SEVERE: 경로 []의 컨텍스트 내의 서블릿 [appServlet]을(를) 위한 Servlet.service() 호출이, 근본 원인(root cause)과 함께, 예외 [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.type.TypeException: Could not set parameters for mapping: ParameterMapping{property='email', mode=IN, javaType=class java.lang.Object, jdbcType=null, numericScale=null, resultMapId='null', jdbcTypeName='null', expression='null'}. Cause: org.apache.ibatis.type.TypeException: Error setting null for parameter #1 with JdbcType OTHER . Try setting a different JdbcType for this parameter or a different jdbcTypeForNull configuration property. Cause: java.sql.SQLException: 부적합한 열 유형: 1111]을(를) 발생시켰습니다.
+	java.sql.SQLException: 부적합한 열 유형: 1111
+		at oracle.jdbc.driver.OracleStatement.getInternalType(OracleStatement.java:3963)
+		at oracle.jdbc.driver.OraclePreparedStatement.setNullCritical(OraclePreparedStatement.java:4596)
+		at oracle.jdbc.driver.OraclePreparedStatement.setNull(OraclePreparedStatement.java:4578)
+		at oracle.jdbc.driver.OraclePreparedStatementWrapper.setNull(OraclePreparedStatementWrapper.java:1285)
+		at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.setNull(HikariProxyPreparedStatement.java)
+		at org.apache.ibatis.type.BaseTypeHandler.setParameter(BaseTypeHandler.java:45)
+		at org.apache.ibatis.scripting.defaults.DefaultParameterHandler.setParameters(DefaultParameterHandler.java:87)
+		at org.apache.ibatis.executor.statement.PreparedStatementHandler.parameterize(PreparedStatementHandler.java:93)
+		at org.apache.ibatis.executor.statement.RoutingStatementHandler.parameterize(RoutingStatementHandler.java:64)
+		at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:86)
+		at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:62)
+		at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:326)
+		at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+		at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+		at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83)
+		at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+		at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+		at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+		at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:433)
+		at com.sun.proxy.$Proxy350.selectOne(Unknown Source)
+		at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:166)
+		at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:83)
+		at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)
+		at com.sun.proxy.$Proxy376.searchId(Unknown Source)
+		at com.spring.dct.user.service.UserService.searchId(UserService.java:69)
+		at com.spring.dct.controller.UserController.searchId(UserController.java:301)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+		at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+		at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+		at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+		at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+		at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+		at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+		at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1064)
+		at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+		at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+		at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+		at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+		at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+		at java.base/java.lang.Thread.run(Thread.java:834)
+
+	3월 28, 2022 8:02:36 오후 org.apache.catalina.core.StandardContext reload
+	INFO: 이름이 []인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
+	3월 28, 2022 8:02:36 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Destroying Spring FrameworkServlet 'appServlet'
+	3월 28, 2022 8:02:36 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Closing Spring root WebApplicationContext
+	3월 28, 2022 8:02:36 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+	WARNING: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [oracle.jdbc.OracleDriver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+	3월 28, 2022 8:02:38 오후 java.util.ArrayList forEach
+	INFO: Name = myOracle Ignoring unknown property: value of "1000" for "maxWitMillis" property
+	3월 28, 2022 8:02:38 오후 org.apache.jasper.servlet.TldScanner scanJars
+	INFO: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+	3월 28, 2022 8:02:38 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: No Spring WebApplicationInitializer types detected on classpath
+	3월 28, 2022 8:02:38 오후 org.apache.catalina.core.ApplicationContext log
+	INFO: Initializing Spring root WebApplicationContext
+	INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+
+
+}

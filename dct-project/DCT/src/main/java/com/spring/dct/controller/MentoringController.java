@@ -1,41 +1,31 @@
 package com.spring.dct.controller;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.spring.dct.lecture.service.ILectureService;
 import com.spring.dct.mentoring.service.IMentoringService;
-import com.spring.dct.vo.MentoringsVO;
-import com.spring.dct.vo.UsersVO;
 import com.spring.dct.util.PageCreator;
 import com.spring.dct.util.PageVO;
+import com.spring.dct.vo.MentoringReplyVO;
+import com.spring.dct.vo.MentoringsVO;
 
 
 
 @Controller
-@RequestMapping("/lecture")
+@RequestMapping("/mentor")
 public class MentoringController {
 
 	@Autowired
@@ -43,103 +33,23 @@ public class MentoringController {
 	
 	
 	//강의 수강평 화면 처리
-		@GetMapping("/mentoringWrite")
-		public void mentoringWrite() {
-			System.out.println("/lecture/mentoringWrite: GET");
-		}
-//		
-//	
-//	
-//	
-//		//강의 업로드 등록처리
-//		@PostMapping("/lectureRegist")
-//		public String  lectureRegist(@RequestParam("lectureThumbnail") MultipartFile lectureThumbnail,
-//				@RequestParam("lectureVideo") MultipartFile lectureVideo , OnlineLectureUplaodVO vo, RedirectAttributes ra, HttpSession session) {
-//			
-//			System.out.println(vo);
-//			
-//			int userNo = ((UsersVO)session.getAttribute("login")).getUserNo();
-//			System.out.println("userNo:" + userNo);
-//			
-//			try {
-//				
-//				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-//				
-//				Date date = new Date();
-//				
-//				String thumbnailFileLoca = sdf.format(date);
-//				
-//				//저장할 썸네일파일 경로
-//				String thumbnailUploadpath = "C:\\Users\\yong\\Desktop\\upload\\" + thumbnailFileLoca;
-//				
-//				
-//				File thumbnailfolder = new File(thumbnailUploadpath);
-//				if(!thumbnailfolder.exists()) {
-//					thumbnailfolder.mkdir();
-//				}
-//				
-//				String thumbnailFilerealname = lectureThumbnail.getOriginalFilename();
-//				
-//				//파일명을 고유한 랜덤 문잔로 생성
-//				UUID uuid = UUID.randomUUID();
-//				String uuids = uuid.toString().replaceAll("-","");
-//				
-//				//확장자를 추출
-//				String thumbnailFileExtionsion = thumbnailFilerealname.substring(thumbnailFilerealname.indexOf("."), thumbnailFilerealname.length());
-//				
-//				String thumbnailFilename = uuids + thumbnailFileExtionsion;
-//				System.out.println("변경해서 저장할 썸네일 파일명: " + thumbnailFilename);
-//				
-//				File saveThumbnailFile = new File(thumbnailUploadpath + "\\" + thumbnailFilename);
-//				lectureThumbnail.transferTo(saveThumbnailFile);
-//				
-//				
-//				System.out.println("-------------------------------------");
-//				
-//				String videoFileLoca = sdf.format(date);
-//				
-//				String videoUploadpath =  "C:\\Users\\yong\\Desktop\\upload\\" + videoFileLoca;
-//				
-//				File videofolder = new File(videoUploadpath);
-//				if(!videofolder.exists()) {
-//					videofolder.mkdir();
-//				}
-//				
-//				String videoFilerealname = lectureVideo.getOriginalFilename();
-//				
-//				String videoFileExtionsion = videoFilerealname.substring(videoFilerealname.indexOf("."), videoFilerealname.length());
-//				
-//				String videoFilename = uuids + videoFileExtionsion;
-//				System.out.println("변경해서 저장할 비디오 파일명: " + videoFilename);
-//				
-//				File saveVideoFile = new File(videoUploadpath + "\\" + videoFilename);
-//				
-//				lectureVideo.transferTo(saveVideoFile);
-//			
-//				OnlineLectureUplaodVO lectureVo = new OnlineLectureUplaodVO(0, userNo, vo.getCategoryNo(),
-//						vo.getAdminId(), vo.getLectureWriter() ,vo.getLectureTitle(),vo.getLectureContent(),vo.getLecturePrice(), vo.getLectureDiscountPrice(), vo.getLectureLike(),
-//						thumbnailUploadpath, thumbnailFileLoca, thumbnailFilename, thumbnailFilerealname,
-//						videoUploadpath, videoFileLoca, videoFilename, videoFilerealname, null);
-//				
-//				
-//				
-//				service.regist(lectureVo);
-//				
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			
-//			
-//			
-//			ra.addFlashAttribute("msg", "정상등록 처리되었습니다.");
-//			
-//			return "redirect:/lecture/lecturePage";
-//			
-//		}
+	@GetMapping("/mentoringWrite")
+	public void mentoringWrite() {
+		System.out.println("/mentor/mentoringWrite: GET");
+	}
 	
+	//멘토링 글 등록
+	@PostMapping("/mentorRegist")
+	public String mentorRegist(MentoringsVO vo) {
+		System.out.println("멘토링 글 등록 요청 들어옴!");
+		System.out.println("param: " + vo);
+		service.regist(vo);
+		
+		return "redirect:/mentor/mentoringList";
+	}
 	
 	//멘토링 리스트 화면
-	@GetMapping("/mentoringPage")
+	@GetMapping("/mentoringList")
 	public String mentoringPage(PageVO vo, Model model) {
 		System.out.println("/lecture/mentoringPage: GET");
 		
@@ -167,136 +77,112 @@ public class MentoringController {
 		model.addAttribute("mentoringList", list);
 		model.addAttribute("pc", pc);
 		
-		return "lecture/mentoringPage";
-		
-		
+		return "mentor/mentoringList";
 		
 	}
 	
+	//모달에 띄울 내용 비동기로 얻어오기
+	@GetMapping("/mentoringModal/{mentoringNo}")
+	@ResponseBody
+	public MentoringsVO mentoringModal(@PathVariable int mentoringNo) {
+		System.out.println("모달 요청!");
+		return service.getContent(mentoringNo);
+	}
 	
-	
-//	//강의 업로드 화면 처리
-//	@GetMapping("/lectureDisplay")
-//	public ResponseEntity<byte[]> thumbnailFile(String thumbnailFileLoca, String thumbnailFilename) {
-//		System.out.println("/lecture/lectureDisplay: GET");
-//		
-//		System.out.println("fileName: " + thumbnailFilename);
-//		System.out.println("thumbnailFileLoca: " + thumbnailFileLoca);
-//		
-//		//가져올 파일의 경로를 설정
-//		File file = new File("C:\\Users\\yong\\Desktop\\upload\\" + thumbnailFileLoca + "\\" + thumbnailFilename);
-//		System.out.println(file);
-//		
-//		ResponseEntity<byte[]> result = null;
-//		
-//		try {
-//			//httpHeaders->org.spring.framwork, 응답할 정보를 전달할 수 있게 담는 곳
-//			HttpHeaders headers = new HttpHeaders();
-//			//probeContentType: 파라미터를 전달받은 파일의 타입을 문자열로 변환해 주는 메서드(/Files-> java.nio)
-//			//사용자에게 보여주고자 하는 데이터가 어떤 파일인지를 검사해서 응답 상태 코드를 다르게 리턴할 수도 있습니다.
-//			headers.add("Content-Type", Files.probeContentType(file.toPath()));
-//			//headers.add("merong", "hello"); 
-//			
-//			//byte[]로 리턴을 할 수 있어서 responseEntity를 사용 안해도 되지만 상태메시지들을 보내기 위해 res~를 사용
-//			//단, copyToByteArray는 꼭 사용해야 하고 byte[](바이트 배열)로 전달해야 하는 것도 중요하다.(사진들을 보낼때는 byte[])
-//			//ResponseEntity<>(응답 객체에 담을 내용, 헤더에 담을 내용, 상태 메시지);	
-//			//FileCopyUtils: 파일 및 스트림 데이터 복사를 위한 간단한 유틸리티 메서드의 집합체.
-//			//file 객체 안에 있는 내용을 복사해서 byte 배열로 변환해서 바디에 담아 화면에 전달.
-//			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		return result;
-//		
-//		
-//	}
-//	
-//	
-//	
-//	
-//	
+
 	//멘토링 상세 화면
 	@GetMapping("/mentoringDetail")
-	public void mentoringDetailPage(int mentoringNo, @ModelAttribute("p") PageVO vo, Model model) {
-		System.out.println("/lecture/lectureDetailPage: GET");
+	public void mentoringDetailPage(int mentoringNo, Model model) {
+		System.out.println("/mentor/mentorDetail: GET");
 		
-		model.addAttribute("mentoringArticle", service.getContent(mentoringNo));
+		MentoringsVO vo = service.getContent(mentoringNo);
+		List<Integer> ratings = service.getAllRatings(mentoringNo);
 		
+		List<Integer> percentage = new ArrayList<>();
+		
+		for(int i=1; i<=5; i++) {
+			double num = (double)Collections.frequency(ratings, i) / ratings.size();
+			percentage.add((int) (num * 100));
+		}
+		
+		System.out.println(percentage);
+		
+		int total = 0;
+		Collections.sort(ratings);
+		for(int rate : ratings) {
+			total += rate;
+		}
+		
+		if(ratings.size() != 0) {
+			vo.setMentoringLike(total / ratings.size());			
+		} else {
+			vo.setMentoringLike(total);
+		}
+		
+		model.addAttribute("mentoringArticle", vo);
+		model.addAttribute("ratings", ratings);
+		model.addAttribute("percentage", percentage);
 		
 	}
-//	
-//	
-//	//강의 업로드 화면 처리
-//		@GetMapping("/videoDisplay")
-//		public ResponseEntity<byte[]> videoFile(String videoFileLoca, String videoFilename) {
-//			System.out.println("/lecture/lectureDisplay: GET");
-//			
-//			System.out.println("fileName: " + videoFilename);
-//			System.out.println("thumbnailFileLoca: " + videoFileLoca);
-//			
-//			//가져올 파일의 경로를 설정
-//			File file = new File("C:\\Users\\yong\\Desktop\\upload\\" + videoFileLoca + "\\" + videoFilename);
-//			System.out.println(file);
-//			
-//			ResponseEntity<byte[]> result = null;
-//			
-//			try {
-//				//httpHeaders->org.spring.framwork, 응답할 정보를 전달할 수 있게 담는 곳
-//				HttpHeaders headers = new HttpHeaders();
-//				//probeContentType: 파라미터를 전달받은 파일의 타입을 문자열로 변환해 주는 메서드(/Files-> java.nio)
-//				//사용자에게 보여주고자 하는 데이터가 어떤 파일인지를 검사해서 응답 상태 코드를 다르게 리턴할 수도 있습니다.
-//				headers.add("Content-Type", Files.probeContentType(file.toPath()));
-//				//headers.add("merong", "hello"); 
-//				
-//				//byte[]로 리턴을 할 수 있어서 responseEntity를 사용 안해도 되지만 상태메시지들을 보내기 위해 res~를 사용
-//				//단, copyToByteArray는 꼭 사용해야 하고 byte[](바이트 배열)로 전달해야 하는 것도 중요하다.(사진들을 보낼때는 byte[])
-//				//ResponseEntity<>(응답 객체에 담을 내용, 헤더에 담을 내용, 상태 메시지);	
-//				//FileCopyUtils: 파일 및 스트림 데이터 복사를 위한 간단한 유틸리티 메서드의 집합체.
-//				//file 객체 안에 있는 내용을 복사해서 byte 배열로 변환해서 바디에 담아 화면에 전달.
-//				result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), headers, HttpStatus.OK);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			
-//			
-//			return result;
-//			
-//			
-//		}
-//		
-//	//강의 수정페이지 이동
-//	@GetMapping("/lectureUpdate")
-//	public String lectureUpdate(int lectureNo, Model model) {
-//		System.out.println("/lecture/lectureUpdate: GET");
-//		
-//		model.addAttribute("lectureArticle", service.getContent(lectureNo));
-//		
-//		return "lecture/lectureUpdate";
-//	}
-//	
-//	//강의 수정처리
-//	@PostMapping("/lectureModify")
-//	public String lectureModify(OnlineLectureUplaodVO upload, RedirectAttributes ra) {
-//		System.out.println("/lecture/lectureModify: POST");
-//		
-//		System.out.println("수정전 vo: "+ upload);
-//		
-//		
-//		return "redirect: /lecture/lectureDetail?lectureNo=" + upload.getLectureNo();
-//	}
-//		
-//	
-//	
-//	//강의 수강평 화면 처리
-//	@GetMapping("/lectureEva")
-//	public void lectureEvaPage() {
-//		System.out.println("/lecture/lectureEva: GET");
-//	}
-//	
 
+	
+	//수강평 댓글 확인
+	@PostMapping("/replyRegist")
+	@ResponseBody
+	public String replyRegist(@RequestBody MentoringReplyVO vo) {
+		System.out.println("멘토링 수강평 댓글 등록 요청!");
+		System.out.println(vo);
+		
+		service.replyRegist(vo);
+		
+		return "success";
+		
+	}
+	
+	@GetMapping("/replyList/{mentoringNo}/{pageNum}")
+	@ResponseBody
+	public Map<String, Object> replyList(@PathVariable int mentoringNo, @PathVariable int pageNum) {
+		
+		PageVO vo = new PageVO();
+		vo.setPageNum(pageNum);
+		vo.setCountPerPage(5);
+		
+		List<MentoringReplyVO> list = service.replyList(vo, mentoringNo);
+		int total = service.getReplyTotal(mentoringNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("total", total);
+		
+		return map;
+		
+	}
+	
+	//댓글 수정
+	@PostMapping("/replyUpdate")
+	@ResponseBody
+	public String replyUpdate(@RequestBody MentoringReplyVO vo) {
+		
+		System.out.println("댓글 수정 요청이 들어옴!");
+		
+		System.out.println(vo);
+		
+		service.replyUpdate(vo);
+		
+		return "modSuccess";
+	}
 
+	
+	//댓글 삭제
+	@PostMapping("/replyDelete")
+	@ResponseBody
+	public String replyDelete(MentoringReplyVO vo) {
+		
+		System.out.println("댓글 삭제 요청 들어옴!");
+		service.replyDelete(vo.getRno());
+		
+		return "delSuccess";
+	}
 	
 	
 	
